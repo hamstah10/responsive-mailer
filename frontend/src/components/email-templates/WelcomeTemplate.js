@@ -202,13 +202,21 @@ export const generateWelcomeHTML = (data = {}) => {
                     </p>
                   </td>
                 </tr>
-                <!-- Contact Info -->
+                <!-- Contact Info - 2 Columns -->
                 <tr>
-                  <td align="center" style="padding-bottom: 20px;">
-                    <p style="margin: 0; font-size: 13px; color: #888888;">
-                      Tel: <a href="tel:+4917975111144" style="color: #bd1f22; text-decoration: none;">(0)179 / 75 111 44</a><br>
-                      E-Mail: <a href="mailto:info@tuningfiles-download.com" style="color: #bd1f22; text-decoration: none;">info@tuningfiles-download.com</a>
-                    </p>
+                  <td style="padding-bottom: 20px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 8px;">
+                      <tr>
+                        <td width="50%" style="padding: 16px 20px; border-right: 1px solid #333333;" align="center">
+                          <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Telefon</p>
+                          <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                        </td>
+                        <td width="50%" style="padding: 16px 20px;" align="center">
+                          <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">E-Mail</p>
+                          <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
                 <!-- Google Reviews -->
