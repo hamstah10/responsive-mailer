@@ -174,13 +174,55 @@ export const generatePasswordResetHTML = (data = {}) => {
           
           <!-- Footer -->
           <tr>
-            <td align="center" style="background-color: #121212; padding: 30px 40px; border-radius: 0 0 12px 12px;">
-              <p style="margin: 0 0 8px 0; font-size: 14px; color: #666666;">
-                TuningFiles Download
-              </p>
-              <p style="margin: 0; font-size: 12px; color: #555555;">
-                Diese E-Mail wurde automatisch generiert. Bitte antworten Sie nicht darauf.
-              </p>
+            <td style="background-color: #121212; padding: 30px 40px; border-radius: 0 0 12px 12px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <!-- Company Info -->
+                <tr>
+                  <td align="center" style="padding-bottom: 20px;">
+                    <p style="margin: 0 0 8px 0; font-size: 15px; font-weight: 600; color: #ffffff;">
+                      tuningfiles-download.com
+                    </p>
+                    <p style="margin: 0; font-size: 13px; color: #888888; line-height: 1.6;">
+                      Hauptstr. 231a<br>
+                      98529 Suhl<br>
+                      Deutschland
+                    </p>
+                  </td>
+                </tr>
+                <!-- Contact Info -->
+                <tr>
+                  <td align="center" style="padding-bottom: 20px;">
+                    <p style="margin: 0; font-size: 13px; color: #888888;">
+                      Tel: <a href="tel:+4917975111144" style="color: #bd1f22; text-decoration: none;">(0)179 / 75 111 44</a><br>
+                      E-Mail: <a href="mailto:info@tuningfiles-download.com" style="color: #bd1f22; text-decoration: none;">info@tuningfiles-download.com</a>
+                    </p>
+                  </td>
+                </tr>
+                <!-- Google Reviews -->
+                <tr>
+                  <td align="center" style="padding-bottom: 20px;">
+                    <a href="https://share.google/VMlw75L8Zmsiz56Yj" target="_blank" style="display: inline-flex; align-items: center; padding: 10px 20px; background-color: #1f1f1f; border-radius: 8px; text-decoration: none;">
+                      <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" width="20" height="20" style="margin-right: 8px;">
+                      <span style="font-size: 13px; color: #ffffff;">Bewerten Sie uns auf Google ⭐</span>
+                    </a>
+                  </td>
+                </tr>
+                <!-- Legal Links -->
+                <tr>
+                  <td align="center" style="padding-top: 16px; border-top: 1px solid #333333;">
+                    <p style="margin: 0; font-size: 12px; color: #555555;">
+                      <a href="https://tuningfiles-download.com/impressum" style="color: #666666; text-decoration: underline;">Impressum</a> | 
+                      <a href="https://tuningfiles-download.com/datenschutz" style="color: #666666; text-decoration: underline;">Datenschutz</a>
+                    </p>
+                    <p style="margin: 12px 0 0 0; font-size: 11px; color: #444444;">
+                      © ${new Date().getFullYear()} TuningFiles Download. Alle Rechte vorbehalten.
+                    </p>
+                    <p style="margin: 8px 0 0 0; font-size: 11px; color: #444444;">
+                      Diese E-Mail wurde automatisch generiert.
+                    </p>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
           
