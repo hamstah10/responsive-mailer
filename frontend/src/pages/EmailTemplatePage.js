@@ -22,7 +22,7 @@ const templates = [
     id: 'basic',
     name: 'Grundvorlage',
     description: 'Leeres Template',
-    icon: Mail,
+    icon: FileText,
     Component: BasicTemplate,
     generateHTML: generateBasicHTML,
     color: 'from-gray-500/20 to-gray-900/20'
