@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor } from 'lucide-react';
+import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
