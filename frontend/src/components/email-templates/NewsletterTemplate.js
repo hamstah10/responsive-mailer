@@ -147,12 +147,12 @@ export const generateNewsletterHTML = (data = {}) => {
             </td>
           </tr>
           
-          <!-- Address & Contact - 2 Columns (integrated in main layout) -->
+          <!-- Address & Contact - 2 Columns (no extra background) -->
           <tr>
             <td style="background-color: #171717; padding: 10px 40px 30px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 8px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
-                  <td width="50%" style="padding: 20px; border-right: 1px solid #333333;" valign="top">
+                  <td width="50%" style="padding: 0 20px 0 0; border-right: 1px solid #333333;" valign="top">
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Adresse</p>
                     <p style="margin: 0 0 6px 0; font-size: 15px; font-weight: 600; color: #ffffff;">
                       tuningfiles-download.com
@@ -163,7 +163,7 @@ export const generateNewsletterHTML = (data = {}) => {
                       Deutschland
                     </p>
                   </td>
-                  <td width="50%" style="padding: 20px;" valign="top">
+                  <td width="50%" style="padding: 0 0 0 20px;" valign="top">
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
                     <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">Tel:</span><br>
