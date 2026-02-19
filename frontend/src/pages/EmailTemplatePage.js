@@ -12,10 +12,21 @@ import {
   WelcomeTemplate,
   generateWelcomeHTML,
   PasswordResetTemplate,
-  generatePasswordResetHTML
+  generatePasswordResetHTML,
+  BasicTemplate,
+  generateBasicHTML
 } from '@/components/email-templates';
 
 const templates = [
+  {
+    id: 'basic',
+    name: 'Grundvorlage',
+    description: 'Leeres Template',
+    icon: Mail,
+    Component: BasicTemplate,
+    generateHTML: generateBasicHTML,
+    color: 'from-gray-500/20 to-gray-900/20'
+  },
   {
     id: 'newsletter',
     name: 'Newsletter',
