@@ -190,42 +190,42 @@ export const generateTransactionHTML = (data = {}) => {
             </td>
           </tr>
           
-          <!-- Social Links -->
+          <!-- Footer Block - Social Media + Address/Contact -->
           <tr>
-            <td align="center" style="background-color: #171717; padding: 30px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0">
+            <td style="background-color: #171717; padding: 0 40px 40px 40px; border-radius: 0 0 12px 12px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 12px; overflow: hidden;">
+                <!-- Social Links -->
                 <tr>
-                  <td align="center" style="padding: 0 12px;">
-                    <a href="https://instagram.com/tuningfiles" target="_blank">
-                      <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="28" height="28" style="display: block;">
-                    </a>
-                  </td>
-                  <td align="center" style="padding: 0 12px;">
-                    <a href="https://facebook.com/tuningfiles" target="_blank">
-                      <img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="Facebook" width="28" height="28" style="display: block;">
-                    </a>
-                  </td>
-                  <td align="center" style="padding: 0 12px;">
-                    <a href="https://wa.me/tuningfiles" target="_blank">
-                      <img src="https://cdn-icons-png.flaticon.com/512/174/174879.png" alt="WhatsApp" width="28" height="28" style="display: block;">
-                    </a>
+                  <td align="center" style="padding: 30px 20px; border-bottom: 1px solid #333333;">
+                    <p style="margin: 0 0 16px 0; font-size: 12px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Folgen Sie uns</p>
+                    <table role="presentation" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td align="center" style="padding: 0 12px;">
+                          <a href="https://instagram.com/tuningfiles" target="_blank" style="text-decoration: none;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="32" height="32" style="display: block;">
+                          </a>
+                        </td>
+                        <td align="center" style="padding: 0 12px;">
+                          <a href="https://facebook.com/tuningfiles" target="_blank" style="text-decoration: none;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="Facebook" width="32" height="32" style="display: block;">
+                          </a>
+                        </td>
+                        <td align="center" style="padding: 0 12px;">
+                          <a href="https://wa.me/tuningfiles" target="_blank" style="text-decoration: none;">
+                            <img src="https://cdn-icons-png.flaticon.com/512/174/174879.png" alt="WhatsApp" width="32" height="32" style="display: block;">
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
-              </table>
-            </td>
-          </tr>
-          
-          <!-- Footer -->
-          <tr>
-            <td style="background-color: #121212; padding: 30px 40px; border-radius: 0 0 12px 12px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                <!-- Company & Contact Info - 2 Columns -->
+                <!-- Address & Contact - 2 Columns -->
                 <tr>
-                  <td style="padding-bottom: 20px;">
-                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 8px;">
+                  <td style="padding: 0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                       <tr>
-                        <td width="50%" style="padding: 20px; border-right: 1px solid #333333;" valign="top">
-                          <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Adresse</p>
+                        <td width="50%" style="padding: 24px; border-right: 1px solid #333333;" valign="top">
+                          <p style="margin: 0 0 8px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Adresse</p>
                           <p style="margin: 0 0 6px 0; font-size: 15px; font-weight: 600; color: #ffffff;">
                             tuningfiles-download.com
                           </p>
@@ -235,9 +235,9 @@ export const generateTransactionHTML = (data = {}) => {
                             Deutschland
                           </p>
                         </td>
-                        <td width="50%" style="padding: 20px;" valign="top">
-                          <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
-                          <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
+                        <td width="50%" style="padding: 24px;" valign="top">
+                          <p style="margin: 0 0 8px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
+                          <p style="margin: 0 0 10px 0; font-size: 13px; color: #a0a0a0;">
                             <span style="color: #666666;">Tel:</span><br>
                             <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
                           </p>
@@ -250,25 +250,33 @@ export const generateTransactionHTML = (data = {}) => {
                     </table>
                   </td>
                 </tr>
-                <!-- Google Reviews -->
+                <!-- Google Reviews & Legal -->
                 <tr>
-                  <td align="center" style="padding-bottom: 20px;">
-                    <a href="https://share.google/VMlw75L8Zmsiz56Yj" target="_blank" style="display: inline-flex; align-items: center; padding: 10px 20px; background-color: #1f1f1f; border-radius: 8px; text-decoration: none;">
-                      <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" width="20" height="20" style="margin-right: 8px;">
-                      <span style="font-size: 13px; color: #ffffff;">Bewerten Sie uns auf Google ⭐</span>
-                    </a>
-                  </td>
-                </tr>
-                <!-- Legal Links -->
-                <tr>
-                  <td align="center" style="padding-top: 16px; border-top: 1px solid #333333;">
-                    <p style="margin: 0; font-size: 12px; color: #555555;">
-                      <a href="https://tuningfiles-download.com/impressum" style="color: #666666; text-decoration: underline;">Impressum</a> | 
-                      <a href="https://tuningfiles-download.com/datenschutz" style="color: #666666; text-decoration: underline;">Datenschutz</a>
-                    </p>
-                    <p style="margin: 12px 0 0 0; font-size: 11px; color: #444444;">
-                      © ${new Date().getFullYear()} TuningFiles Download. Alle Rechte vorbehalten.
-                    </p>
+                  <td style="padding: 20px 24px; border-top: 1px solid #333333;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <td align="left" valign="middle">
+                          <a href="https://share.google/VMlw75L8Zmsiz56Yj" target="_blank" style="display: inline-block; text-decoration: none;">
+                            <table role="presentation" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td style="padding-right: 8px;" valign="middle">
+                                  <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" width="18" height="18" style="display: block;">
+                                </td>
+                                <td valign="middle">
+                                  <span style="font-size: 12px; color: #a0a0a0;">Bewerten Sie uns ⭐</span>
+                                </td>
+                              </tr>
+                            </table>
+                          </a>
+                        </td>
+                        <td align="right" valign="middle">
+                          <span style="font-size: 11px; color: #555555;">
+                            <a href="https://tuningfiles-download.com/impressum" style="color: #666666; text-decoration: none;">Impressum</a> · 
+                            <a href="https://tuningfiles-download.com/datenschutz" style="color: #666666; text-decoration: none;">Datenschutz</a>
+                          </span>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>
