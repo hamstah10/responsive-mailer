@@ -215,42 +215,42 @@ export const generateTransactionHTML = (data = {}) => {
             </td>
           </tr>
           
-          <!-- Footer -->
+          <!-- Address & Contact - 2 Columns (integrated in main layout) -->
           <tr>
-            <td style="background-color: #121212; padding: 30px 40px; border-radius: 0 0 12px 12px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                <!-- Company & Contact Info - 2 Columns -->
+            <td style="background-color: #171717; padding: 10px 40px 30px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 8px;">
                 <tr>
-                  <td style="padding-bottom: 20px;">
-                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 8px;">
-                      <tr>
-                        <td width="50%" style="padding: 20px; border-right: 1px solid #333333;" valign="top">
-                          <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Adresse</p>
-                          <p style="margin: 0 0 6px 0; font-size: 15px; font-weight: 600; color: #ffffff;">
-                            tuningfiles-download.com
-                          </p>
-                          <p style="margin: 0; font-size: 13px; color: #a0a0a0; line-height: 1.5;">
-                            Hauptstr. 231a<br>
-                            98529 Suhl<br>
-                            Deutschland
-                          </p>
-                        </td>
-                        <td width="50%" style="padding: 20px;" valign="top">
-                          <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
-                          <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
-                            <span style="color: #666666;">Tel:</span><br>
-                            <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
-                          </p>
-                          <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
-                            <span style="color: #666666;">E-Mail:</span><br>
-                            <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
+                  <td width="50%" style="padding: 20px; border-right: 1px solid #333333;" valign="top">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Adresse</p>
+                    <p style="margin: 0 0 6px 0; font-size: 15px; font-weight: 600; color: #ffffff;">
+                      tuningfiles-download.com
+                    </p>
+                    <p style="margin: 0; font-size: 13px; color: #a0a0a0; line-height: 1.5;">
+                      Hauptstr. 231a<br>
+                      98529 Suhl<br>
+                      Deutschland
+                    </p>
+                  </td>
+                  <td width="50%" style="padding: 20px;" valign="top">
+                    <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
+                    <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
+                      <span style="color: #666666;">Tel:</span><br>
+                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                    </p>
+                    <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
+                      <span style="color: #666666;">E-Mail:</span><br>
+                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                    </p>
                   </td>
                 </tr>
-                <!-- Google Reviews -->
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Google Reviews & Legal Links -->
+          <tr>
+            <td style="background-color: #171717; padding: 0 40px 30px 40px; border-radius: 0 0 12px 12px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center" style="padding-bottom: 20px;">
                     <a href="https://share.google/VMlw75L8Zmsiz56Yj" target="_blank" style="display: inline-flex; align-items: center; padding: 10px 20px; background-color: #1f1f1f; border-radius: 8px; text-decoration: none;">
@@ -259,7 +259,6 @@ export const generateTransactionHTML = (data = {}) => {
                     </a>
                   </td>
                 </tr>
-                <!-- Legal Links -->
                 <tr>
                   <td align="center" style="padding-top: 16px; border-top: 1px solid #333333;">
                     <p style="margin: 0; font-size: 12px; color: #555555;">
