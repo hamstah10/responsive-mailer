@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText, Tag, Upload, Loader2 } from 'lucide-react';
+import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText, Tag, Upload, Loader2, Edit3, X, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import {
   NewsletterTemplate,
@@ -20,6 +23,51 @@ import {
 } from '@/components/email-templates';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
+
+// Default editable content for each template
+const defaultTemplateData = {
+  blackweek: {
+    headline: 'BLACK FRIDAY',
+    subheadline: 'ALIENTECH',
+    mainTitle: 'Starten Sie mit Chiptuning.',
+    mainSubtitle: 'KESS3 Slave. Ihr Einstieg auf das nächste Level.',
+    badgeText: 'FÜR NEUKUNDEN · HARDWARE & FILESERVICE',
+    productName: 'KESS3 Slave',
+    originalPrice: '3.090,00 €',
+    salePrice: '1.690,00 €',
+    savings: '1.400,00 €',
+    creditsValue: '550€',
+    creditsText: '5 Tuningfiles inklusive',
+    featureText: 'Inklusive OBD, Bench und Boot für Pkw. Wir unterstützen Sie online beim Einstieg und beim ersten Auto.',
+    ctaText: 'JETZT ANGEBOT ANSEHEN',
+    ctaUrl: 'https://www.chiptuning-tools.shop/alientech/alientech-starter-paket'
+  },
+  basic: {
+    headline: 'Ihre Überschrift hier',
+    content: 'Ihr Inhalt hier...'
+  },
+  newsletter: {
+    headline: 'Newsletter Titel',
+    introText: 'Hallo! Hier sind die neuesten Updates...',
+    ctaText: 'Mehr erfahren',
+    ctaUrl: 'https://tuningfiles-download.com'
+  },
+  transaction: {
+    orderNumber: 'TFD-2024-001234',
+    customerName: 'Max Mustermann',
+    orderTotal: '149,00 €'
+  },
+  welcome: {
+    customerName: 'Max Mustermann',
+    ctaText: 'Jetzt starten',
+    ctaUrl: 'https://tuningfiles-download.com'
+  },
+  password: {
+    customerName: 'Max Mustermann',
+    resetLink: 'https://tuningfiles-download.com/reset/token123',
+    validityTime: '24 Stunden'
+  }
+};
 
 const templates = [
   {
@@ -85,9 +133,23 @@ export const EmailTemplatePage = () => {
   const [copied, setCopied] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadingAll, setUploadingAll] = useState(false);
+  const [showEditor, setShowEditor] = useState(false);
+  const [templateData, setTemplateData] = useState(defaultTemplateData);
+
+  const currentData = templateData[selectedTemplate.id] || {};
+
+  const handleDataChange = (field, value) => {
+    setTemplateData(prev => ({
+      ...prev,
+      [selectedTemplate.id]: {
+        ...prev[selectedTemplate.id],
+        [field]: value
+      }
+    }));
+  };
 
   const handleCopyHTML = async () => {
-    const html = selectedTemplate.generateHTML();
+    const html = selectedTemplate.generateHTML(currentData);
     try {
       await navigator.clipboard.writeText(html);
       setCopied(true);
@@ -99,7 +161,7 @@ export const EmailTemplatePage = () => {
   };
 
   const handleDownloadHTML = () => {
-    const html = selectedTemplate.generateHTML();
+    const html = selectedTemplate.generateHTML(currentData);
     const blob = new Blob([html], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -115,7 +177,7 @@ export const EmailTemplatePage = () => {
   const handleUploadToListmonk = async () => {
     setUploading(true);
     try {
-      const html = selectedTemplate.generateHTML();
+      const html = selectedTemplate.generateHTML(currentData);
       const response = await fetch(`${API_URL}/api/listmonk/templates`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -129,7 +191,7 @@ export const EmailTemplatePage = () => {
       const data = await response.json();
       
       if (response.ok && data.success) {
-        toast.success(`"${selectedTemplate.name}" wurde zu Listmonk exportiert!`);
+        toast.success(data.message || `"${selectedTemplate.name}" wurde zu Listmonk exportiert!`);
       } else {
         toast.error(data.detail || 'Export fehlgeschlagen');
       }
@@ -147,7 +209,8 @@ export const EmailTemplatePage = () => {
     
     for (const template of templates) {
       try {
-        const html = template.generateHTML();
+        const data = templateData[template.id] || {};
+        const html = template.generateHTML(data);
         const response = await fetch(`${API_URL}/api/listmonk/templates`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -171,7 +234,7 @@ export const EmailTemplatePage = () => {
     setUploadingAll(false);
     
     if (errorCount === 0) {
-      toast.success(`Alle ${successCount} Templates wurden zu Listmonk exportiert!`);
+      toast.success(`Alle ${successCount} Templates wurden zu Listmonk aktualisiert!`);
     } else {
       toast.warning(`${successCount} erfolgreich, ${errorCount} fehlgeschlagen`);
     }
@@ -197,6 +260,15 @@ export const EmailTemplatePage = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowEditor(!showEditor)}
+                className="hidden md:flex items-center gap-2"
+              >
+                <Edit3 className="h-4 w-4" />
+                {showEditor ? 'Editor schließen' : 'Bearbeiten'}
+              </Button>
               <Button
                 variant="outline"
                 size="sm"
@@ -378,7 +450,7 @@ export const EmailTemplatePage = () => {
                   style={{ backgroundColor: '#121212' }}
                 >
                   <div className="overflow-auto max-h-[calc(100vh-300px)]">
-                    <SelectedComponent />
+                    <SelectedComponent data={currentData} />
                   </div>
                 </div>
               </div>
@@ -412,10 +484,255 @@ export const EmailTemplatePage = () => {
                 </div>
                 <div className="overflow-auto max-h-[calc(100vh-300px)]">
                   <pre className="p-6 text-sm font-mono text-foreground/80 whitespace-pre-wrap break-all">
-                    <code>{selectedTemplate.generateHTML()}</code>
+                    <code>{selectedTemplate.generateHTML(currentData)}</code>
                   </pre>
                 </div>
               </div>
+            )}
+
+            {/* Editor Panel */}
+            {showEditor && (
+              <Card className="mt-6 bg-card border-border">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Edit3 className="h-5 w-5 text-primary" />
+                        Content bearbeiten
+                      </CardTitle>
+                      <CardDescription>Passen Sie die Inhalte des {selectedTemplate.name} Templates an</CardDescription>
+                    </div>
+                    <Button variant="ghost" size="sm" onClick={() => setShowEditor(false)}>
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {selectedTemplate.id === 'blackweek' && (
+                      <>
+                        <div className="space-y-2">
+                          <Label htmlFor="headline">Headline</Label>
+                          <Input
+                            id="headline"
+                            value={currentData.headline || ''}
+                            onChange={(e) => handleDataChange('headline', e.target.value)}
+                            placeholder="BLACK FRIDAY"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="subheadline">Subheadline</Label>
+                          <Input
+                            id="subheadline"
+                            value={currentData.subheadline || ''}
+                            onChange={(e) => handleDataChange('subheadline', e.target.value)}
+                            placeholder="ALIENTECH"
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="mainTitle">Haupttitel</Label>
+                          <Input
+                            id="mainTitle"
+                            value={currentData.mainTitle || ''}
+                            onChange={(e) => handleDataChange('mainTitle', e.target.value)}
+                            placeholder="Starten Sie mit Chiptuning."
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="mainSubtitle">Untertitel</Label>
+                          <Input
+                            id="mainSubtitle"
+                            value={currentData.mainSubtitle || ''}
+                            onChange={(e) => handleDataChange('mainSubtitle', e.target.value)}
+                            placeholder="KESS3 Slave. Ihr Einstieg auf das nächste Level."
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="productName">Produktname</Label>
+                          <Input
+                            id="productName"
+                            value={currentData.productName || ''}
+                            onChange={(e) => handleDataChange('productName', e.target.value)}
+                            placeholder="KESS3 Slave"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="badgeText">Badge Text</Label>
+                          <Input
+                            id="badgeText"
+                            value={currentData.badgeText || ''}
+                            onChange={(e) => handleDataChange('badgeText', e.target.value)}
+                            placeholder="FÜR NEUKUNDEN · HARDWARE & FILESERVICE"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="originalPrice">Originalpreis</Label>
+                          <Input
+                            id="originalPrice"
+                            value={currentData.originalPrice || ''}
+                            onChange={(e) => handleDataChange('originalPrice', e.target.value)}
+                            placeholder="3.090,00 €"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="salePrice">Aktionspreis</Label>
+                          <Input
+                            id="salePrice"
+                            value={currentData.salePrice || ''}
+                            onChange={(e) => handleDataChange('salePrice', e.target.value)}
+                            placeholder="1.690,00 €"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="savings">Ersparnis</Label>
+                          <Input
+                            id="savings"
+                            value={currentData.savings || ''}
+                            onChange={(e) => handleDataChange('savings', e.target.value)}
+                            placeholder="1.400,00 €"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="creditsText">Credits Text</Label>
+                          <Input
+                            id="creditsText"
+                            value={currentData.creditsText || ''}
+                            onChange={(e) => handleDataChange('creditsText', e.target.value)}
+                            placeholder="5 Tuningfiles inklusive"
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="featureText">Feature Text</Label>
+                          <Textarea
+                            id="featureText"
+                            value={currentData.featureText || ''}
+                            onChange={(e) => handleDataChange('featureText', e.target.value)}
+                            placeholder="Inklusive OBD, Bench und Boot für Pkw..."
+                            rows={2}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="ctaText">Button Text</Label>
+                          <Input
+                            id="ctaText"
+                            value={currentData.ctaText || ''}
+                            onChange={(e) => handleDataChange('ctaText', e.target.value)}
+                            placeholder="JETZT ANGEBOT ANSEHEN"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="ctaUrl">Button Link</Label>
+                          <Input
+                            id="ctaUrl"
+                            value={currentData.ctaUrl || ''}
+                            onChange={(e) => handleDataChange('ctaUrl', e.target.value)}
+                            placeholder="https://..."
+                          />
+                        </div>
+                      </>
+                    )}
+                    {selectedTemplate.id === 'newsletter' && (
+                      <>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="headline">Headline</Label>
+                          <Input
+                            id="headline"
+                            value={currentData.headline || ''}
+                            onChange={(e) => handleDataChange('headline', e.target.value)}
+                            placeholder="Newsletter Titel"
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="introText">Intro Text</Label>
+                          <Textarea
+                            id="introText"
+                            value={currentData.introText || ''}
+                            onChange={(e) => handleDataChange('introText', e.target.value)}
+                            placeholder="Hallo! Hier sind die neuesten Updates..."
+                            rows={3}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="ctaText">Button Text</Label>
+                          <Input
+                            id="ctaText"
+                            value={currentData.ctaText || ''}
+                            onChange={(e) => handleDataChange('ctaText', e.target.value)}
+                            placeholder="Mehr erfahren"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="ctaUrl">Button Link</Label>
+                          <Input
+                            id="ctaUrl"
+                            value={currentData.ctaUrl || ''}
+                            onChange={(e) => handleDataChange('ctaUrl', e.target.value)}
+                            placeholder="https://..."
+                          />
+                        </div>
+                      </>
+                    )}
+                    {(selectedTemplate.id === 'welcome' || selectedTemplate.id === 'password' || selectedTemplate.id === 'transaction') && (
+                      <>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="customerName">Kundenname</Label>
+                          <Input
+                            id="customerName"
+                            value={currentData.customerName || ''}
+                            onChange={(e) => handleDataChange('customerName', e.target.value)}
+                            placeholder="Max Mustermann"
+                          />
+                        </div>
+                        {selectedTemplate.id === 'transaction' && (
+                          <>
+                            <div className="space-y-2">
+                              <Label htmlFor="orderNumber">Bestellnummer</Label>
+                              <Input
+                                id="orderNumber"
+                                value={currentData.orderNumber || ''}
+                                onChange={(e) => handleDataChange('orderNumber', e.target.value)}
+                                placeholder="TFD-2024-001234"
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="orderTotal">Bestellsumme</Label>
+                              <Input
+                                id="orderTotal"
+                                value={currentData.orderTotal || ''}
+                                onChange={(e) => handleDataChange('orderTotal', e.target.value)}
+                                placeholder="149,00 €"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </>
+                    )}
+                    {selectedTemplate.id === 'basic' && (
+                      <>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="headline">Überschrift</Label>
+                          <Input
+                            id="headline"
+                            value={currentData.headline || ''}
+                            onChange={(e) => handleDataChange('headline', e.target.value)}
+                            placeholder="Ihre Überschrift hier"
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="content">Inhalt</Label>
+                          <Textarea
+                            id="content"
+                            value={currentData.content || ''}
+                            onChange={(e) => handleDataChange('content', e.target.value)}
+                            placeholder="Ihr Inhalt hier..."
+                            rows={4}
+                          />
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             )}
 
             {/* Info Cards */}

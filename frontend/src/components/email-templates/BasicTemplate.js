@@ -4,13 +4,8 @@
 export const generateBasicHTML = (data = {}) => {
   const {
     logoUrl = 'https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png',
-    content = `<tr>
-      <td style="padding: 40px; text-align: center;">
-        <p style="margin: 0; font-size: 16px; color: #a0a0a0; line-height: 1.6;">
-          Hier kommt Ihr Inhalt...
-        </p>
-      </td>
-    </tr>`
+    headline = 'Ihre Überschrift hier',
+    content = 'Ihr Inhalt hier...'
   } = data;
 
   return `<!DOCTYPE html>
@@ -50,10 +45,13 @@ export const generateBasicHTML = (data = {}) => {
           <!-- ==================== -->
           
           <tr>
-            <td style="background-color: #171717;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <td style="background-color: #171717; padding: 40px;">
+              <h1 style="margin: 0 0 20px 0; font-size: 28px; font-weight: 700; color: #ffffff; text-align: center;">
+                ${headline}
+              </h1>
+              <p style="margin: 0; font-size: 16px; color: #a0a0a0; line-height: 1.6; text-align: center;">
                 ${content}
-              </table>
+              </p>
             </td>
           </tr>
           

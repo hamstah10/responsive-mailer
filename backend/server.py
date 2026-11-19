@@ -150,10 +150,21 @@ async def get_listmonk_templates():
         raise HTTPException(status_code=500, detail=f"Connection error: {str(e)}")
 
 @api_router.post("/listmonk/templates", response_model=ListmonkResponse)
-async def create_listmonk_template(template: ListmonkTemplateCreate):
-    """Create a new template in Listmonk"""
+async def create_or_update_listmonk_template(template: ListmonkTemplateCreate):
+    """Create a new template or update existing one in Listmonk"""
     try:
         api_url, auth = get_listmonk_auth()
+        
+        # First, check if template with same name already exists
+        existing_response = requests.get(f"{api_url}/api/templates", auth=auth, timeout=30)
+        existing_template_id = None
+        
+        if existing_response.status_code == 200:
+            existing_data = existing_response.json()
+            for t in existing_data.get("data", []):
+                if t.get("name") == template.template_name:
+                    existing_template_id = t.get("id")
+                    break
         
         payload = {
             "name": template.template_name,
@@ -161,20 +172,33 @@ async def create_listmonk_template(template: ListmonkTemplateCreate):
             "body": template.template_body
         }
         
-        response = requests.post(
-            f"{api_url}/api/templates",
-            json=payload,
-            auth=auth,
-            headers={"Content-Type": "application/json"},
-            timeout=30
-        )
+        if existing_template_id:
+            # Update existing template
+            response = requests.put(
+                f"{api_url}/api/templates/{existing_template_id}",
+                json=payload,
+                auth=auth,
+                headers={"Content-Type": "application/json"},
+                timeout=30
+            )
+            action = "aktualisiert"
+        else:
+            # Create new template
+            response = requests.post(
+                f"{api_url}/api/templates",
+                json=payload,
+                auth=auth,
+                headers={"Content-Type": "application/json"},
+                timeout=30
+            )
+            action = "erstellt"
         
         if response.status_code == 200:
             data = response.json()
-            template_id = data.get("data", {}).get("id") if isinstance(data.get("data"), dict) else None
+            template_id = existing_template_id or (data.get("data", {}).get("id") if isinstance(data.get("data"), dict) else None)
             return ListmonkResponse(
                 success=True,
-                message=f"Template '{template.template_name}' erfolgreich erstellt",
+                message=f"Template '{template.template_name}' erfolgreich {action}",
                 template_id=template_id
             )
         else:
