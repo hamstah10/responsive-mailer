@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText, Tag, Upload, Loader2, Edit3, X, Save } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText, Tag, Upload, Loader2, Edit3, X, Save, Plus, Trash2, CopyPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -69,7 +69,8 @@ const defaultTemplateData = {
   }
 };
 
-const templates = [
+// Base templates (not deletable)
+const baseTemplates = [
   {
     id: 'blackweek',
     name: 'Black Week',
@@ -126,17 +127,63 @@ const templates = [
   }
 ];
 
+// Template type mapping for duplicates
+const templateTypeMap = {
+  blackweek: { Component: BlackWeekTemplate, generateHTML: generateBlackWeekHTML, icon: Tag, baseColor: 'from-red-600/30 to-black/30' },
+  basic: { Component: BasicTemplate, generateHTML: generateBasicHTML, icon: FileText, baseColor: 'from-gray-500/20 to-gray-900/20' },
+  newsletter: { Component: NewsletterTemplate, generateHTML: generateNewsletterHTML, icon: Mail, baseColor: 'from-red-500/20 to-red-900/20' },
+  transaction: { Component: TransactionTemplate, generateHTML: generateTransactionHTML, icon: ShoppingCart, baseColor: 'from-green-500/20 to-green-900/20' },
+  welcome: { Component: WelcomeTemplate, generateHTML: generateWelcomeHTML, icon: UserPlus, baseColor: 'from-blue-500/20 to-blue-900/20' },
+  password: { Component: PasswordResetTemplate, generateHTML: generatePasswordResetHTML, icon: KeyRound, baseColor: 'from-orange-500/20 to-orange-900/20' }
+};
+
 export const EmailTemplatePage = () => {
-  const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
+  // Load saved variants from localStorage
+  const loadSavedVariants = () => {
+    try {
+      const saved = localStorage.getItem('tfd_template_variants');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const loadSavedData = () => {
+    try {
+      const saved = localStorage.getItem('tfd_template_data');
+      return saved ? { ...defaultTemplateData, ...JSON.parse(saved) } : defaultTemplateData;
+    } catch {
+      return defaultTemplateData;
+    }
+  };
+
+  const [customVariants, setCustomVariants] = useState(loadSavedVariants);
+  const [templateData, setTemplateData] = useState(loadSavedData);
+  
+  // Combine base templates with custom variants
+  const allTemplates = [...baseTemplates, ...customVariants];
+  
+  const [selectedTemplate, setSelectedTemplate] = useState(allTemplates[0]);
   const [viewMode, setViewMode] = useState('preview');
   const [deviceView, setDeviceView] = useState('desktop');
   const [copied, setCopied] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadingAll, setUploadingAll] = useState(false);
   const [showEditor, setShowEditor] = useState(false);
-  const [templateData, setTemplateData] = useState(defaultTemplateData);
+  const [editingName, setEditingName] = useState(null);
+  const [tempName, setTempName] = useState('');
 
-  const currentData = templateData[selectedTemplate.id] || {};
+  // Save variants to localStorage when they change
+  useEffect(() => {
+    localStorage.setItem('tfd_template_variants', JSON.stringify(customVariants));
+  }, [customVariants]);
+
+  // Save template data to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('tfd_template_data', JSON.stringify(templateData));
+  }, [templateData]);
+
+  const currentData = templateData[selectedTemplate.id] || templateData[selectedTemplate.baseType] || {};
 
   const handleDataChange = (field, value) => {
     setTemplateData(prev => ({
@@ -146,6 +193,69 @@ export const EmailTemplatePage = () => {
         [field]: value
       }
     }));
+  };
+
+  const handleDuplicateTemplate = (template) => {
+    const baseType = template.baseType || template.id;
+    const baseData = templateData[template.id] || templateData[baseType] || defaultTemplateData[baseType] || {};
+    const timestamp = Date.now();
+    const newId = `${baseType}_copy_${timestamp}`;
+    
+    // Count existing copies for naming
+    const existingCopies = customVariants.filter(v => v.baseType === baseType).length;
+    const copyNumber = existingCopies + 1;
+    
+    const typeInfo = templateTypeMap[baseType];
+    
+    const newVariant = {
+      id: newId,
+      name: `${template.name} (Kopie ${copyNumber})`,
+      description: 'Eigene Variante',
+      icon: typeInfo.icon,
+      Component: typeInfo.Component,
+      generateHTML: typeInfo.generateHTML,
+      color: typeInfo.baseColor,
+      baseType: baseType,
+      isCustom: true
+    };
+    
+    // Copy the template data
+    setTemplateData(prev => ({
+      ...prev,
+      [newId]: { ...baseData }
+    }));
+    
+    setCustomVariants(prev => [...prev, newVariant]);
+    setSelectedTemplate(newVariant);
+    setShowEditor(true);
+    toast.success(`"${template.name}" wurde dupliziert!`);
+  };
+
+  const handleDeleteVariant = (variantId) => {
+    const variant = customVariants.find(v => v.id === variantId);
+    if (!variant) return;
+    
+    setCustomVariants(prev => prev.filter(v => v.id !== variantId));
+    setTemplateData(prev => {
+      const newData = { ...prev };
+      delete newData[variantId];
+      return newData;
+    });
+    
+    // Select the first template if the deleted one was selected
+    if (selectedTemplate.id === variantId) {
+      setSelectedTemplate(baseTemplates[0]);
+    }
+    
+    toast.success(`"${variant.name}" wurde gelöscht`);
+  };
+
+  const handleRenameVariant = (variantId, newName) => {
+    setCustomVariants(prev => prev.map(v => 
+      v.id === variantId ? { ...v, name: newName } : v
+    ));
+    setEditingName(null);
+    setTempName('');
   };
 
   const handleCopyHTML = async () => {
@@ -207,9 +317,9 @@ export const EmailTemplatePage = () => {
     let successCount = 0;
     let errorCount = 0;
     
-    for (const template of templates) {
+    for (const template of allTemplates) {
       try {
-        const data = templateData[template.id] || {};
+        const data = templateData[template.id] || templateData[template.baseType] || {};
         const html = template.generateHTML(data);
         const response = await fetch(`${API_URL}/api/listmonk/templates`, {
           method: 'POST',
@@ -311,31 +421,86 @@ export const EmailTemplatePage = () => {
                 Vorlagen auswählen
               </h2>
               <div className="space-y-3">
-                {templates.map((template) => {
+                {allTemplates.map((template) => {
                   const Icon = template.icon;
                   const isSelected = selectedTemplate.id === template.id;
+                  const isCustom = template.isCustom;
                   return (
-                    <button
-                      key={template.id}
-                      onClick={() => setSelectedTemplate(template)}
-                      className={`w-full text-left p-4 rounded-xl transition-all duration-200 ${
-                        isSelected
-                          ? 'bg-primary/10 border-2 border-primary ring-2 ring-primary/20'
-                          : 'bg-card border border-border hover:border-primary/50 hover:bg-card/80'
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${template.color}`}>
-                          <Icon className={`h-5 w-5 ${isSelected ? 'text-primary' : 'text-foreground'}`} />
+                    <div key={template.id} className="relative group">
+                      <button
+                        onClick={() => setSelectedTemplate(template)}
+                        className={`w-full text-left p-4 rounded-xl transition-all duration-200 ${
+                          isSelected
+                            ? 'bg-primary/10 border-2 border-primary ring-2 ring-primary/20'
+                            : 'bg-card border border-border hover:border-primary/50 hover:bg-card/80'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg bg-gradient-to-br ${template.color}`}>
+                            <Icon className={`h-5 w-5 ${isSelected ? 'text-primary' : 'text-foreground'}`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            {editingName === template.id ? (
+                              <Input
+                                value={tempName}
+                                onChange={(e) => setTempName(e.target.value)}
+                                onBlur={() => handleRenameVariant(template.id, tempName)}
+                                onKeyDown={(e) => e.key === 'Enter' && handleRenameVariant(template.id, tempName)}
+                                className="h-6 text-sm"
+                                autoFocus
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            ) : (
+                              <p className={`font-medium truncate ${isSelected ? 'text-primary' : 'text-foreground'}`}>
+                                {template.name}
+                              </p>
+                            )}
+                            <p className="text-xs text-muted-foreground">
+                              {isCustom ? 'Eigene Variante' : template.description}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p className={`font-medium ${isSelected ? 'text-primary' : 'text-foreground'}`}>
-                            {template.name}
-                          </p>
-                          <p className="text-xs text-muted-foreground">{template.description}</p>
-                        </div>
+                      </button>
+                      
+                      {/* Action buttons on hover */}
+                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7"
+                          onClick={(e) => { e.stopPropagation(); handleDuplicateTemplate(template); }}
+                          title="Duplizieren"
+                        >
+                          <CopyPlus className="h-3.5 w-3.5" />
+                        </Button>
+                        {isCustom && (
+                          <>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7"
+                              onClick={(e) => { 
+                                e.stopPropagation(); 
+                                setEditingName(template.id); 
+                                setTempName(template.name); 
+                              }}
+                              title="Umbenennen"
+                            >
+                              <Edit3 className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7 text-destructive hover:text-destructive"
+                              onClick={(e) => { e.stopPropagation(); handleDeleteVariant(template.id); }}
+                              title="Löschen"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          </>
+                        )}
                       </div>
-                    </button>
+                    </div>
                   );
                 })}
               </div>
@@ -502,14 +667,25 @@ export const EmailTemplatePage = () => {
                       </CardTitle>
                       <CardDescription>Passen Sie die Inhalte des {selectedTemplate.name} Templates an</CardDescription>
                     </div>
-                    <Button variant="ghost" size="sm" onClick={() => setShowEditor(false)}>
-                      <X className="h-4 w-4" />
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => handleDuplicateTemplate(selectedTemplate)}
+                        className="flex items-center gap-2"
+                      >
+                        <CopyPlus className="h-4 w-4" />
+                        Duplizieren
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={() => setShowEditor(false)}>
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {selectedTemplate.id === 'blackweek' && (
+                    {(selectedTemplate.id === 'blackweek' || selectedTemplate.baseType === 'blackweek') && (
                       <>
                         <div className="space-y-2">
                           <Label htmlFor="headline">Headline</Label>
@@ -631,7 +807,7 @@ export const EmailTemplatePage = () => {
                         </div>
                       </>
                     )}
-                    {selectedTemplate.id === 'newsletter' && (
+                    {(selectedTemplate.id === 'newsletter' || selectedTemplate.baseType === 'newsletter') && (
                       <>
                         <div className="space-y-2 md:col-span-2">
                           <Label htmlFor="headline">Headline</Label>
@@ -672,7 +848,7 @@ export const EmailTemplatePage = () => {
                         </div>
                       </>
                     )}
-                    {(selectedTemplate.id === 'welcome' || selectedTemplate.id === 'password' || selectedTemplate.id === 'transaction') && (
+                    {(selectedTemplate.id === 'welcome' || selectedTemplate.id === 'password' || selectedTemplate.id === 'transaction' || selectedTemplate.baseType === 'welcome' || selectedTemplate.baseType === 'password' || selectedTemplate.baseType === 'transaction') && (
                       <>
                         <div className="space-y-2 md:col-span-2">
                           <Label htmlFor="customerName">Kundenname</Label>
@@ -683,7 +859,7 @@ export const EmailTemplatePage = () => {
                             placeholder="Max Mustermann"
                           />
                         </div>
-                        {selectedTemplate.id === 'transaction' && (
+                        {(selectedTemplate.id === 'transaction' || selectedTemplate.baseType === 'transaction') && (
                           <>
                             <div className="space-y-2">
                               <Label htmlFor="orderNumber">Bestellnummer</Label>
@@ -707,7 +883,7 @@ export const EmailTemplatePage = () => {
                         )}
                       </>
                     )}
-                    {selectedTemplate.id === 'basic' && (
+                    {(selectedTemplate.id === 'basic' || selectedTemplate.baseType === 'basic') && (
                       <>
                         <div className="space-y-2 md:col-span-2">
                           <Label htmlFor="headline">Überschrift</Label>
