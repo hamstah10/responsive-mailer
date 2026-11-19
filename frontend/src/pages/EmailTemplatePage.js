@@ -72,13 +72,13 @@ const defaultTemplateData = {
   blackweekcredits: {
     headline: 'BLACK WEEK',
     subheadline: 'EXKLUSIV FÜR BESTANDSKUNDEN',
-    mainTitle: '15% auf alle Credits',
+    mainTitle: '15% Bonus auf alle Credits',
     mainSubtitle: 'Ihr Treue-Bonus. Nur diese Woche.',
     greeting: 'Hallo',
     customerName: '{{ .Subscriber.FirstName | default "geschätzter Kunde" }}',
     introText: 'Als treuer Kunde erhalten Sie diese Woche exklusiven Zugang zu unserem Black Week Special:',
-    discountBadge: '15% RABATT',
-    discountText: 'auf alle Credit-Pakete',
+    discountBadge: '15% BONUS',
+    discountText: 'Extra-Credits geschenkt',
     validUntil: 'Gültig bis Sonntag, 23:59 Uhr',
     ctaText: 'JETZT IM PORTAL EINLOGGEN',
     ctaUrl: 'https://portal.tuningfiles-download.com/'

@@ -6,18 +6,18 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
     logoUrl = 'https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png',
     headline = 'BLACK WEEK',
     subheadline = 'EXKLUSIV FÜR BESTANDSKUNDEN',
-    mainTitle = '15% auf alle Credits',
+    mainTitle = '15% Bonus auf alle Credits',
     mainSubtitle = 'Ihr Treue-Bonus. Nur diese Woche.',
     greeting = 'Hallo',
     customerName = '{{ .Subscriber.FirstName | default "geschätzter Kunde" }}',
     introText = 'Als treuer Kunde erhalten Sie diese Woche exklusiven Zugang zu unserem Black Week Special:',
-    discountBadge = '15% RABATT',
-    discountText = 'auf alle Credit-Pakete',
+    discountBadge = '15% BONUS',
+    discountText = 'Extra-Credits geschenkt',
     validUntil = 'Gültig bis Sonntag, 23:59 Uhr',
     creditPackages = [
-      { name: '10 Credits', original: '89,00 €', sale: '75,65 €', savings: '13,35 €' },
-      { name: '25 Credits', original: '199,00 €', sale: '169,15 €', savings: '29,85 €' },
-      { name: '50 Credits', original: '349,00 €', sale: '296,65 €', savings: '52,35 €' }
+      { name: '10 Credits', price: '89,00 €', bonus: '+1,5 Credits', bonusValue: 'Wert: 13,35 €' },
+      { name: '25 Credits', price: '199,00 €', bonus: '+3,75 Credits', bonusValue: 'Wert: 29,85 €' },
+      { name: '50 Credits', price: '349,00 €', bonus: '+7,5 Credits', bonusValue: 'Wert: 52,35 €' }
     ],
     benefitTitle = 'Ihre Vorteile als Bestandskunde',
     benefits = [
@@ -40,13 +40,13 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
             <td style="padding: 20px;">
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
-                  <td width="50%" valign="middle">
+                  <td width="45%" valign="middle">
                     <p style="margin: 0; font-size: 18px; font-weight: 700; color: #ffffff;">${pkg.name}</p>
+                    <p style="margin: 6px 0 0 0; font-size: 14px; color: #888888;">${pkg.price}</p>
                   </td>
-                  <td width="50%" valign="middle" align="right">
-                    <p style="margin: 0; font-size: 13px; color: #666666; text-decoration: line-through;">${pkg.original}</p>
-                    <p style="margin: 4px 0 0 0; font-size: 22px; font-weight: 700; color: #bd1f25;">${pkg.sale}</p>
-                    <p style="margin: 4px 0 0 0; font-size: 11px; color: #22c55e; font-weight: 600;">Sie sparen ${pkg.savings}</p>
+                  <td width="55%" valign="middle" align="right">
+                    <p style="margin: 0; font-size: 20px; font-weight: 700; color: #22c55e;">${pkg.bonus}</p>
+                    <p style="margin: 4px 0 0 0; font-size: 12px; color: #22c55e; font-weight: 500;">${pkg.bonusValue} gratis!</p>
                   </td>
                 </tr>
               </table>
