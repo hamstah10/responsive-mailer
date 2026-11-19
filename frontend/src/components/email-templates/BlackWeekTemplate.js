@@ -108,7 +108,7 @@ export const generateBlackWeekHTML = (data = {}) => {
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="border-radius: 8px; background: linear-gradient(135deg, #bd1f22 0%, #9a1a1c 100%); box-shadow: 0 4px 15px rgba(189, 31, 34, 0.4);">
-                    <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 14px; font-weight: 700; color: #ffffff; text-decoration: none; letter-spacing: 1px;">
+                    <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 14px; font-weight: 700; color: #ffffff; text-decoration: none; letter-spacing: 1px;" translate="no">
                       ${ctaText} →
                     </a>
                   </td>
