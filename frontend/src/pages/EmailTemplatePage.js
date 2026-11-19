@@ -19,7 +19,9 @@ import {
   BasicTemplate,
   generateBasicHTML,
   BlackWeekTemplate,
-  generateBlackWeekHTML
+  generateBlackWeekHTML,
+  BlackWeekCreditsTemplate,
+  generateBlackWeekCreditsHTML
 } from '@/components/email-templates';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
@@ -66,6 +68,20 @@ const defaultTemplateData = {
     customerName: 'Max Mustermann',
     resetLink: 'https://tuningfiles-download.com/reset/token123',
     validityTime: '24 Stunden'
+  },
+  blackweekcredits: {
+    headline: 'BLACK WEEK',
+    subheadline: 'EXKLUSIV FÜR BESTANDSKUNDEN',
+    mainTitle: '15% auf alle Credits',
+    mainSubtitle: 'Ihr Treue-Bonus. Nur diese Woche.',
+    greeting: 'Hallo',
+    customerName: 'geschätzter Kunde',
+    introText: 'Als treuer Kunde erhalten Sie diese Woche exklusiven Zugang zu unserem Black Week Special:',
+    discountBadge: '15% RABATT',
+    discountText: 'auf alle Credit-Pakete',
+    validUntil: 'Gültig bis Sonntag, 23:59 Uhr',
+    ctaText: 'JETZT IM PORTAL EINLOGGEN',
+    ctaUrl: 'https://portal.tuningfiles-download.com/'
   }
 };
 
@@ -74,11 +90,20 @@ const baseTemplates = [
   {
     id: 'blackweek',
     name: 'Black Week',
-    description: 'Sale & Angebote',
+    description: 'Neukunden Angebot',
     icon: Tag,
     Component: BlackWeekTemplate,
     generateHTML: generateBlackWeekHTML,
     color: 'from-red-600/30 to-black/30'
+  },
+  {
+    id: 'blackweekcredits',
+    name: 'Black Week Credits',
+    description: 'Bestandskunden 15%',
+    icon: Tag,
+    Component: BlackWeekCreditsTemplate,
+    generateHTML: generateBlackWeekCreditsHTML,
+    color: 'from-red-500/30 to-green-900/30'
   },
   {
     id: 'basic',
@@ -130,6 +155,7 @@ const baseTemplates = [
 // Template type mapping for duplicates
 const templateTypeMap = {
   blackweek: { Component: BlackWeekTemplate, generateHTML: generateBlackWeekHTML, icon: Tag, baseColor: 'from-red-600/30 to-black/30' },
+  blackweekcredits: { Component: BlackWeekCreditsTemplate, generateHTML: generateBlackWeekCreditsHTML, icon: Tag, baseColor: 'from-red-500/30 to-green-900/30' },
   basic: { Component: BasicTemplate, generateHTML: generateBasicHTML, icon: FileText, baseColor: 'from-gray-500/20 to-gray-900/20' },
   newsletter: { Component: NewsletterTemplate, generateHTML: generateNewsletterHTML, icon: Mail, baseColor: 'from-red-500/20 to-red-900/20' },
   transaction: { Component: TransactionTemplate, generateHTML: generateTransactionHTML, icon: ShoppingCart, baseColor: 'from-green-500/20 to-green-900/20' },
@@ -803,6 +829,110 @@ export const EmailTemplatePage = () => {
                             value={currentData.ctaUrl || ''}
                             onChange={(e) => handleDataChange('ctaUrl', e.target.value)}
                             placeholder="https://..."
+                          />
+                        </div>
+                      </>
+                    )}
+                    {(selectedTemplate.id === 'blackweekcredits' || selectedTemplate.baseType === 'blackweekcredits') && (
+                      <>
+                        <div className="space-y-2">
+                          <Label htmlFor="headline">Headline</Label>
+                          <Input
+                            id="headline"
+                            value={currentData.headline || ''}
+                            onChange={(e) => handleDataChange('headline', e.target.value)}
+                            placeholder="BLACK WEEK"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="subheadline">Subheadline</Label>
+                          <Input
+                            id="subheadline"
+                            value={currentData.subheadline || ''}
+                            onChange={(e) => handleDataChange('subheadline', e.target.value)}
+                            placeholder="EXKLUSIV FÜR BESTANDSKUNDEN"
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="mainTitle">Haupttitel</Label>
+                          <Input
+                            id="mainTitle"
+                            value={currentData.mainTitle || ''}
+                            onChange={(e) => handleDataChange('mainTitle', e.target.value)}
+                            placeholder="15% auf alle Credits"
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="mainSubtitle">Untertitel</Label>
+                          <Input
+                            id="mainSubtitle"
+                            value={currentData.mainSubtitle || ''}
+                            onChange={(e) => handleDataChange('mainSubtitle', e.target.value)}
+                            placeholder="Ihr Treue-Bonus. Nur diese Woche."
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="greeting">Begrüßung</Label>
+                          <Input
+                            id="greeting"
+                            value={currentData.greeting || ''}
+                            onChange={(e) => handleDataChange('greeting', e.target.value)}
+                            placeholder="Hallo"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="customerName">Kundenname</Label>
+                          <Input
+                            id="customerName"
+                            value={currentData.customerName || ''}
+                            onChange={(e) => handleDataChange('customerName', e.target.value)}
+                            placeholder="geschätzter Kunde"
+                          />
+                        </div>
+                        <div className="space-y-2 md:col-span-2">
+                          <Label htmlFor="introText">Intro Text</Label>
+                          <Textarea
+                            id="introText"
+                            value={currentData.introText || ''}
+                            onChange={(e) => handleDataChange('introText', e.target.value)}
+                            placeholder="Als treuer Kunde erhalten Sie..."
+                            rows={2}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="discountBadge">Rabatt Badge</Label>
+                          <Input
+                            id="discountBadge"
+                            value={currentData.discountBadge || ''}
+                            onChange={(e) => handleDataChange('discountBadge', e.target.value)}
+                            placeholder="15% RABATT"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="validUntil">Gültig bis</Label>
+                          <Input
+                            id="validUntil"
+                            value={currentData.validUntil || ''}
+                            onChange={(e) => handleDataChange('validUntil', e.target.value)}
+                            placeholder="Gültig bis Sonntag, 23:59 Uhr"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="ctaText">Button Text</Label>
+                          <Input
+                            id="ctaText"
+                            value={currentData.ctaText || ''}
+                            onChange={(e) => handleDataChange('ctaText', e.target.value)}
+                            placeholder="JETZT IM PORTAL EINLOGGEN"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="ctaUrl">Button Link</Label>
+                          <Input
+                            id="ctaUrl"
+                            value={currentData.ctaUrl || ''}
+                            onChange={(e) => handleDataChange('ctaUrl', e.target.value)}
+                            placeholder="https://portal.tuningfiles-download.com/"
                           />
                         </div>
                       </>
