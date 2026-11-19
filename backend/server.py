@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -6,9 +6,11 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from typing import List, Optional
 import uuid
 from datetime import datetime, timezone
+import requests
+from requests.auth import HTTPBasicAuth
 
 
 ROOT_DIR = Path(__file__).parent
@@ -37,7 +39,45 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add your routes to the router instead of directly to app
+# ============================================
+# LISTMONK MODELS
+# ============================================
+
+class ListmonkTemplate(BaseModel):
+    name: str
+    body: str
+    type: str = "campaign"
+    subject: Optional[str] = None
+
+class ListmonkTemplateCreate(BaseModel):
+    template_name: str
+    template_body: str
+    template_type: str = "campaign"
+
+class ListmonkResponse(BaseModel):
+    success: bool
+    message: str
+    template_id: Optional[int] = None
+
+# ============================================
+# HELPER FUNCTIONS
+# ============================================
+
+def get_listmonk_auth():
+    """Get Listmonk API authentication"""
+    api_url = os.environ.get('LISTMONK_API_URL', '')
+    api_user = os.environ.get('LISTMONK_API_USER', '')
+    api_token = os.environ.get('LISTMONK_API_TOKEN', '')
+    
+    if not all([api_url, api_user, api_token]):
+        raise HTTPException(status_code=500, detail="Listmonk API credentials not configured")
+    
+    return api_url, HTTPBasicAuth(api_user, api_token)
+
+# ============================================
+# ROUTES
+# ============================================
+
 @api_router.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -47,7 +87,6 @@ async def create_status_check(input: StatusCheckCreate):
     status_dict = input.model_dump()
     status_obj = StatusCheck(**status_dict)
     
-    # Convert to dict and serialize datetime to ISO string for MongoDB
     doc = status_obj.model_dump()
     doc['timestamp'] = doc['timestamp'].isoformat()
     
@@ -56,15 +95,127 @@ async def create_status_check(input: StatusCheckCreate):
 
 @api_router.get("/status", response_model=List[StatusCheck])
 async def get_status_checks():
-    # Exclude MongoDB's _id field from the query results
     status_checks = await db.status_checks.find({}, {"_id": 0}).to_list(1000)
     
-    # Convert ISO string timestamps back to datetime objects
     for check in status_checks:
         if isinstance(check['timestamp'], str):
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+# ============================================
+# LISTMONK ROUTES
+# ============================================
+
+@api_router.get("/listmonk/test")
+async def test_listmonk_connection():
+    """Test connection to Listmonk API"""
+    try:
+        api_url, auth = get_listmonk_auth()
+        response = requests.get(f"{api_url}/api/templates", auth=auth, timeout=10)
+        
+        if response.status_code == 200:
+            data = response.json()
+            template_count = len(data.get("data", []))
+            return {
+                "success": True,
+                "message": f"Verbindung erfolgreich! {template_count} Templates gefunden.",
+                "url": api_url
+            }
+        else:
+            return {
+                "success": False,
+                "message": f"API Fehler: {response.status_code}",
+                "url": api_url
+            }
+    except Exception as e:
+        return {
+            "success": False,
+            "message": f"Verbindungsfehler: {str(e)}",
+            "url": os.environ.get('LISTMONK_API_URL', 'nicht konfiguriert')
+        }
+
+@api_router.get("/listmonk/templates")
+async def get_listmonk_templates():
+    """Get all templates from Listmonk"""
+    try:
+        api_url, auth = get_listmonk_auth()
+        response = requests.get(f"{api_url}/api/templates", auth=auth, timeout=30)
+        
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise HTTPException(status_code=response.status_code, detail=f"Listmonk API error: {response.text}")
+    except requests.RequestException as e:
+        raise HTTPException(status_code=500, detail=f"Connection error: {str(e)}")
+
+@api_router.post("/listmonk/templates", response_model=ListmonkResponse)
+async def create_listmonk_template(template: ListmonkTemplateCreate):
+    """Create a new template in Listmonk"""
+    try:
+        api_url, auth = get_listmonk_auth()
+        
+        payload = {
+            "name": template.template_name,
+            "type": template.template_type,
+            "body": template.template_body
+        }
+        
+        response = requests.post(
+            f"{api_url}/api/templates",
+            json=payload,
+            auth=auth,
+            headers={"Content-Type": "application/json"},
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            template_id = data.get("data", {}).get("id") if isinstance(data.get("data"), dict) else None
+            return ListmonkResponse(
+                success=True,
+                message=f"Template '{template.template_name}' erfolgreich erstellt",
+                template_id=template_id
+            )
+        else:
+            raise HTTPException(status_code=response.status_code, detail=f"Listmonk API error: {response.text}")
+    except requests.RequestException as e:
+        raise HTTPException(status_code=500, detail=f"Connection error: {str(e)}")
+
+@api_router.put("/listmonk/templates/{template_id}", response_model=ListmonkResponse)
+async def update_listmonk_template(template_id: int, template: ListmonkTemplateCreate):
+    """Update an existing template in Listmonk"""
+    try:
+        api_url, auth = get_listmonk_auth()
+        
+        payload = {
+            "name": template.template_name,
+            "type": template.template_type,
+            "body": template.template_body
+        }
+        
+        response = requests.put(
+            f"{api_url}/api/templates/{template_id}",
+            json=payload,
+            auth=auth,
+            headers={"Content-Type": "application/json"},
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            return ListmonkResponse(
+                success=True,
+                message=f"Template '{template.template_name}' erfolgreich aktualisiert",
+                template_id=template_id
+            )
+        else:
+            raise HTTPException(status_code=response.status_code, detail=f"Listmonk API error: {response.text}")
+    except requests.RequestException as e:
+        raise HTTPException(status_code=500, detail=f"Connection error: {str(e)}")
+
+# ============================================
+# INCLUDE ROUTER & MIDDLEWARE
+# ============================================
 
 # Include the router in the main app
 app.include_router(api_router)

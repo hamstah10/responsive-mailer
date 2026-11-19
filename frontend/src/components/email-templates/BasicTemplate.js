@@ -61,6 +61,13 @@ export const generateBasicHTML = (data = {}) => {
           <!-- CONTENT AREA END -->
           <!-- ==================== -->
           
+          <!-- Listmonk Content Placeholder -->
+          <tr>
+            <td style="background-color: #171717; padding: 20px 40px;">
+              {{ template "content" . }}
+            </td>
+          </tr>
+          
           <!-- Divider -->
           <tr>
             <td style="background-color: #171717; padding: 0 40px;">

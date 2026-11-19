@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText, Tag } from 'lucide-react';
+import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText, Tag, Upload, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +18,8 @@ import {
   BlackWeekTemplate,
   generateBlackWeekHTML
 } from '@/components/email-templates';
+
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const templates = [
   {
@@ -81,6 +83,8 @@ export const EmailTemplatePage = () => {
   const [viewMode, setViewMode] = useState('preview');
   const [deviceView, setDeviceView] = useState('desktop');
   const [copied, setCopied] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadingAll, setUploadingAll] = useState(false);
 
   const handleCopyHTML = async () => {
     const html = selectedTemplate.generateHTML();
@@ -108,6 +112,71 @@ export const EmailTemplatePage = () => {
     toast.success('HTML-Datei wurde heruntergeladen!');
   };
 
+  const handleUploadToListmonk = async () => {
+    setUploading(true);
+    try {
+      const html = selectedTemplate.generateHTML();
+      const response = await fetch(`${API_URL}/api/listmonk/templates`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          template_name: `TFD - ${selectedTemplate.name}`,
+          template_body: html,
+          template_type: 'campaign'
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        toast.success(`"${selectedTemplate.name}" wurde zu Listmonk exportiert!`);
+      } else {
+        toast.error(data.detail || 'Export fehlgeschlagen');
+      }
+    } catch (err) {
+      toast.error(`Fehler: ${err.message}`);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleUploadAllToListmonk = async () => {
+    setUploadingAll(true);
+    let successCount = 0;
+    let errorCount = 0;
+    
+    for (const template of templates) {
+      try {
+        const html = template.generateHTML();
+        const response = await fetch(`${API_URL}/api/listmonk/templates`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            template_name: `TFD - ${template.name}`,
+            template_body: html,
+            template_type: 'campaign'
+          })
+        });
+        
+        if (response.ok) {
+          successCount++;
+        } else {
+          errorCount++;
+        }
+      } catch (err) {
+        errorCount++;
+      }
+    }
+    
+    setUploadingAll(false);
+    
+    if (errorCount === 0) {
+      toast.success(`Alle ${successCount} Templates wurden zu Listmonk exportiert!`);
+    } else {
+      toast.warning(`${successCount} erfolgreich, ${errorCount} fehlgeschlagen`);
+    }
+  };
+
   const SelectedComponent = selectedTemplate.Component;
 
   return (
@@ -128,6 +197,16 @@ export const EmailTemplatePage = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleUploadToListmonk}
+                disabled={uploading}
+                className="hidden md:flex items-center gap-2 border-green-600 text-green-500 hover:bg-green-600/10"
+              >
+                {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                Zu Listmonk
+              </Button>
               <Button
                 variant="outline"
                 size="sm"
@@ -188,6 +267,18 @@ export const EmailTemplatePage = () => {
                   );
                 })}
               </div>
+
+              {/* Export All Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleUploadAllToListmonk}
+                disabled={uploadingAll}
+                className="mt-4 w-full flex items-center justify-center gap-2 border-green-600 text-green-500 hover:bg-green-600/10"
+              >
+                {uploadingAll ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                {uploadingAll ? 'Exportiere...' : 'Alle zu Listmonk exportieren'}
+              </Button>
 
               {/* Color Palette Info */}
               <Card className="mt-6 bg-card border-border">

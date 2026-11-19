@@ -124,6 +124,13 @@ export const generatePasswordResetHTML = (data = {}) => {
             </td>
           </tr>
           
+          <!-- Listmonk Content Placeholder -->
+          <tr>
+            <td style="background-color: #171717; padding: 20px 40px;">
+              {{ template "content" . }}
+            </td>
+          </tr>
+          
           <!-- Divider -->
           <tr>
             <td style="background-color: #171717; padding: 0 40px;">
