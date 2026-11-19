@@ -14,8 +14,8 @@ export const generateBlackWeekHTML = (data = {}) => {
     originalPrice = '3.090,00 €',
     salePrice = '1.690,00 €',
     savings = '1.400,00 €',
-    creditsValue = '550,00 €',
-    creditsText = '5 kostenlose Datei-Credits',
+    creditsValue = '550€',
+    creditsText = '5 Tuningfiles inklusive',
     featureText = 'Inklusive OBD, Bench und Boot für Pkw. Wir unterstützen Sie online beim Einstieg und beim ersten Auto.',
     priceNote = 'Preisangaben netto, zzgl. gesetzlicher Mehrwertsteuer. Maßgeblich sind die finalen Konditionen im Shop.',
     ctaText = 'JETZT ANGEBOT ANSEHEN',
@@ -160,7 +160,7 @@ export const generateBlackWeekHTML = (data = {}) => {
                         </td>
                       </tr>
                       <tr>
-                        <td colspan="2" style="padding: 16px 0 0 0;">
+                        <td colspan="2" align="center" style="padding: 16px 0 0 0;">
                           <div style="display: inline-block; padding: 10px 16px; background-color: #0d3320; border-radius: 6px;">
                             <span style="font-size: 13px; color: #22c55e; font-weight: 600;">
                               ✓ ${creditsText} im Wert von ${creditsValue}
