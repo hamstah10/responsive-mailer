@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the responsive email template application for TuningFiles Download at https://email-template-16.preview.emergentagent.com. The application should have: 1. A sidebar with 4 email template options: Newsletter, Bestellung, Willkommen, Passwort 2. Each template should display a preview of the email 3. A color palette showing the brand colors (#121212, #bd1f22, #171717) 4. Tabs to switch between 'Vorschau' (Preview) and 'HTML-Code' views 5. Device toggle buttons for Desktop and Mobile preview 6. Download and Copy HTML buttons in the header 7. Info cards at the bottom showing: Responsive, Kompatibel, Inline CSS 8. Footer with social media links"
+user_problem_statement: "Test the responsive email template application for TuningFiles Download at https://responsive-mailer-3--6zpp8ape.preview.emergentagent.com. The application should have: 1. A sidebar with 4 email template options: Newsletter, Bestellung, Willkommen, Passwort 2. Each template should display a preview of the email 3. A color palette showing the brand colors (#121212, #bd1f22, #171717) 4. Tabs to switch between 'Vorschau' (Preview) and 'HTML-Code' views 5. Device toggle buttons for Desktop and Mobile preview 6. Download and Copy HTML buttons in the header 7. Info cards at the bottom showing: Responsive, Kompatibel, Inline CSS 8. Footer with social media links"
 
 frontend:
   - task: "Sidebar with 4 email template options"

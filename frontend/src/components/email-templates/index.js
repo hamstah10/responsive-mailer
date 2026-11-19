@@ -3,3 +3,4 @@ export { TransactionTemplate, generateTransactionHTML } from './TransactionTempl
 export { WelcomeTemplate, generateWelcomeHTML } from './WelcomeTemplate';
 export { PasswordResetTemplate, generatePasswordResetHTML } from './PasswordResetTemplate';
 export { BasicTemplate, generateBasicHTML } from './BasicTemplate';
+export { BlackWeekTemplate, generateBlackWeekHTML } from './BlackWeekTemplate';

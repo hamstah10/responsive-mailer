@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText } from 'lucide-react';
+import { Copy, Check, Mail, ShoppingCart, UserPlus, KeyRound, Eye, Code, Download, Smartphone, Monitor, FileText, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,10 +14,21 @@ import {
   PasswordResetTemplate,
   generatePasswordResetHTML,
   BasicTemplate,
-  generateBasicHTML
+  generateBasicHTML,
+  BlackWeekTemplate,
+  generateBlackWeekHTML
 } from '@/components/email-templates';
 
 const templates = [
+  {
+    id: 'blackweek',
+    name: 'Black Week',
+    description: 'Sale & Angebote',
+    icon: Tag,
+    Component: BlackWeekTemplate,
+    generateHTML: generateBlackWeekHTML,
+    color: 'from-red-600/30 to-black/30'
+  },
   {
     id: 'basic',
     name: 'Grundvorlage',
