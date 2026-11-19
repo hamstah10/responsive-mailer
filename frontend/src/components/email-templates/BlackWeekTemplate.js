@@ -1,5 +1,5 @@
 // Black Week Angebot Email Template - KESS3 Slave
-// Colors: #121212, #bd1f22, #171717
+// Colors: #121212, #bd1f25, #171717
 
 export const generateBlackWeekHTML = (data = {}) => {
   const {
@@ -57,7 +57,7 @@ export const generateBlackWeekHTML = (data = {}) => {
           
           <!-- BLACK FRIDAY / ALIENTECH Banner -->
           <tr>
-            <td style="background: linear-gradient(135deg, #bd1f22 0%, #8a1618 50%, #121212 100%); padding: 0;">
+            <td style="background: linear-gradient(135deg, #bd1f25 0%, #8a1618 50%, #121212 100%); padding: 0;">
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center" style="padding: 50px 30px;">
@@ -84,7 +84,7 @@ export const generateBlackWeekHTML = (data = {}) => {
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center">
-                    <span style="display: inline-block; padding: 8px 20px; background-color: #bd1f22; border-radius: 4px; font-size: 11px; font-weight: 700; color: #ffffff; letter-spacing: 1px; text-transform: uppercase;">
+                    <span style="display: inline-block; padding: 8px 20px; background-color: #bd1f25; border-radius: 4px; font-size: 11px; font-weight: 700; color: #ffffff; letter-spacing: 1px; text-transform: uppercase;">
                       ${badgeText}
                     </span>
                   </td>
@@ -107,7 +107,7 @@ export const generateBlackWeekHTML = (data = {}) => {
             <td align="center" style="background-color: #171717; padding: 20px 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="border-radius: 8px; background: linear-gradient(135deg, #bd1f22 0%, #9a1a1c 100%); box-shadow: 0 4px 15px rgba(189, 31, 34, 0.4);">
+                  <td style="border-radius: 8px; background: linear-gradient(135deg, #bd1f25 0%, #9a1a1c 100%); box-shadow: 0 4px 15px rgba(189, 31, 34, 0.4);">
                     <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 14px; font-weight: 700; color: #ffffff; text-decoration: none; letter-spacing: 1px;" translate="no">
                       ${ctaText} →
                     </a>
@@ -148,7 +148,7 @@ export const generateBlackWeekHTML = (data = {}) => {
                           <span style="font-size: 16px; font-weight: 600; color: #ffffff;">Aktionspreis</span>
                         </td>
                         <td align="right" style="padding: 12px 0; border-bottom: 1px solid #333333;">
-                          <span style="font-size: 24px; font-weight: 700; color: #bd1f22;">${salePrice}</span>
+                          <span style="font-size: 24px; font-weight: 700; color: #bd1f25;">${salePrice}</span>
                         </td>
                       </tr>
                       <tr>
@@ -250,11 +250,11 @@ export const generateBlackWeekHTML = (data = {}) => {
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
                     <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">Tel:</span><br>
-                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
                     </p>
                     <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">E-Mail:</span><br>
-                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
                     </p>
                   </td>
                 </tr>

@@ -1,5 +1,5 @@
 // Basic / Blank Email Template - Only Structure
-// Colors: #121212, #bd1f22, #171717
+// Colors: #121212, #bd1f25, #171717
 
 export const generateBasicHTML = (data = {}) => {
   const {
@@ -115,11 +115,11 @@ export const generateBasicHTML = (data = {}) => {
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
                     <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">Tel:</span><br>
-                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
                     </p>
                     <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">E-Mail:</span><br>
-                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
                     </p>
                   </td>
                 </tr>

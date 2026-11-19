@@ -1,5 +1,5 @@
 // Password Reset Email Template
-// Colors: #121212, #bd1f22, #171717
+// Colors: #121212, #bd1f25, #171717
 
 export const generatePasswordResetHTML = (data = {}) => {
   const {
@@ -38,7 +38,7 @@ export const generatePasswordResetHTML = (data = {}) => {
                 <tr>
                   <td align="center">
                     <!-- Lock Icon Circle -->
-                    <div style="width: 80px; height: 80px; background-color: #2a1a1a; border: 2px solid #bd1f22; border-radius: 50%; display: inline-block; text-align: center; line-height: 76px; margin-bottom: 24px;">
+                    <div style="width: 80px; height: 80px; background-color: #2a1a1a; border: 2px solid #bd1f25; border-radius: 50%; display: inline-block; text-align: center; line-height: 76px; margin-bottom: 24px;">
                       <span style="font-size: 36px;">🔐</span>
                     </div>
                     <h1 style="margin: 0 0 12px 0; font-size: 26px; font-weight: 700; color: #ffffff;">
@@ -63,7 +63,7 @@ export const generatePasswordResetHTML = (data = {}) => {
                       Klicken Sie auf den Button unten, um ein neues Passwort für Ihr TuningFiles Download Konto zu erstellen.
                     </p>
                     <p style="margin: 0; font-size: 14px; color: #888888;">
-                      <strong style="color: #bd1f22;">⏰ Wichtig:</strong> Dieser Link ist nur ${expiryTime} gültig.
+                      <strong style="color: #bd1f25;">⏰ Wichtig:</strong> Dieser Link ist nur ${expiryTime} gültig.
                     </p>
                   </td>
                 </tr>
@@ -76,7 +76,7 @@ export const generatePasswordResetHTML = (data = {}) => {
             <td align="center" style="background-color: #171717; padding: 30px 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td align="center" style="background-color: #bd1f22; border-radius: 8px;">
+                  <td align="center" style="background-color: #bd1f25; border-radius: 8px;">
                     <a href="${resetUrl}" target="_blank" style="display: inline-block; padding: 18px 56px; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none;">
                       🔑 Passwort zurücksetzen
                     </a>
@@ -95,7 +95,7 @@ export const generatePasswordResetHTML = (data = {}) => {
                     <p style="margin: 0 0 12px 0; font-size: 13px; color: #888888;">
                       Button funktioniert nicht? Kopieren Sie diesen Link in Ihren Browser:
                     </p>
-                    <p style="margin: 0; font-size: 12px; color: #bd1f22; word-break: break-all;">
+                    <p style="margin: 0; font-size: 12px; color: #bd1f25; word-break: break-all;">
                       ${resetUrl}
                     </p>
                   </td>
@@ -107,7 +107,7 @@ export const generatePasswordResetHTML = (data = {}) => {
           <!-- Security Notice -->
           <tr>
             <td style="background-color: #171717; padding: 0 40px 40px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1a1a; border-radius: 8px; border-left: 4px solid #bd1f22;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1a1a; border-radius: 8px; border-left: 4px solid #bd1f25;">
                 <tr>
                   <td style="padding: 20px;">
                     <h3 style="margin: 0 0 12px 0; font-size: 15px; font-weight: 600; color: #ffffff;">
@@ -141,7 +141,7 @@ export const generatePasswordResetHTML = (data = {}) => {
               <p style="margin: 0 0 8px 0; font-size: 14px; color: #666666;">
                 Fragen? Kontaktieren Sie uns:
               </p>
-              <a href="mailto:${supportEmail}" style="font-size: 14px; color: #bd1f22; text-decoration: none;">
+              <a href="mailto:${supportEmail}" style="font-size: 14px; color: #bd1f25; text-decoration: none;">
                 ${supportEmail}
               </a>
             </td>
@@ -192,11 +192,11 @@ export const generatePasswordResetHTML = (data = {}) => {
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
                     <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">Tel:</span><br>
-                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
                     </p>
                     <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">E-Mail:</span><br>
-                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
                     </p>
                   </td>
                 </tr>

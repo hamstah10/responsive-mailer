@@ -1,5 +1,5 @@
 // Transaction / Order Confirmation Email Template
-// Colors: #121212, #bd1f22, #171717
+// Colors: #121212, #bd1f25, #171717
 
 export const generateTransactionHTML = (data = {}) => {
   const {
@@ -105,7 +105,7 @@ export const generateTransactionHTML = (data = {}) => {
                           </p>
                         </td>
                         <td align="right" style="vertical-align: top;">
-                          <p style="margin: 0; font-size: 16px; color: #bd1f22; font-weight: 600;">
+                          <p style="margin: 0; font-size: 16px; color: #bd1f25; font-weight: 600;">
                             ${item.price}
                           </p>
                         </td>
@@ -132,7 +132,7 @@ export const generateTransactionHTML = (data = {}) => {
                           <p style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 700;">Gesamt</p>
                         </td>
                         <td align="right" style="padding-top: 12px;">
-                          <p style="margin: 0; font-size: 22px; color: #bd1f22; font-weight: 700;">${total}</p>
+                          <p style="margin: 0; font-size: 22px; color: #bd1f25; font-weight: 700;">${total}</p>
                         </td>
                       </tr>
                     </table>
@@ -147,7 +147,7 @@ export const generateTransactionHTML = (data = {}) => {
             <td align="center" style="background-color: #171717; padding: 30px 40px 40px 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td align="center" style="background-color: #bd1f22; border-radius: 8px;">
+                  <td align="center" style="background-color: #bd1f25; border-radius: 8px;">
                     <a href="${downloadUrl}" target="_blank" style="display: inline-block; padding: 16px 48px; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none;">
                       📥 Dateien herunterladen
                     </a>
@@ -163,7 +163,7 @@ export const generateTransactionHTML = (data = {}) => {
           <!-- Support Box -->
           <tr>
             <td style="background-color: #171717; padding: 0 40px 40px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1a1a2e; border-radius: 8px; border: 1px solid #bd1f22;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1a1a2e; border-radius: 8px; border: 1px solid #bd1f25;">
                 <tr>
                   <td style="padding: 24px;">
                     <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600; color: #ffffff;">
@@ -171,7 +171,7 @@ export const generateTransactionHTML = (data = {}) => {
                     </h3>
                     <p style="margin: 0; font-size: 14px; color: #a0a0a0; line-height: 1.6;">
                       Unser Support-Team steht Ihnen zur Verfügung:<br>
-                      <a href="mailto:${supportEmail}" style="color: #bd1f22; text-decoration: none;">${supportEmail}</a>
+                      <a href="mailto:${supportEmail}" style="color: #bd1f25; text-decoration: none;">${supportEmail}</a>
                     </p>
                   </td>
                 </tr>
@@ -235,11 +235,11 @@ export const generateTransactionHTML = (data = {}) => {
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
                     <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">Tel:</span><br>
-                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
                     </p>
                     <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">E-Mail:</span><br>
-                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
                     </p>
                   </td>
                 </tr>

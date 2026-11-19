@@ -1,5 +1,5 @@
 // Newsletter / Marketing Email Template
-// Colors: #121212, #bd1f22, #171717
+// Colors: #121212, #bd1f25, #171717
 
 export const generateNewsletterHTML = (data = {}) => {
   const {
@@ -72,7 +72,7 @@ export const generateNewsletterHTML = (data = {}) => {
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 ${products.map(product => `
                 <tr>
-                  <td style="padding: 20px; background-color: #1f1f1f; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid #bd1f22;">
+                  <td style="padding: 20px; background-color: #1f1f1f; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid #bd1f25;">
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                       <tr>
                         <td>
@@ -82,7 +82,7 @@ export const generateNewsletterHTML = (data = {}) => {
                           <p style="margin: 0 0 12px 0; font-size: 14px; color: #a0a0a0;">
                             ${product.description}
                           </p>
-                          <span style="display: inline-block; font-size: 20px; font-weight: 700; color: #bd1f22;">
+                          <span style="display: inline-block; font-size: 20px; font-weight: 700; color: #bd1f25;">
                             ${product.price}
                           </span>
                         </td>
@@ -101,7 +101,7 @@ export const generateNewsletterHTML = (data = {}) => {
             <td align="center" style="background-color: #171717; padding: 0 40px 50px 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td align="center" style="background-color: #bd1f22; border-radius: 8px;">
+                  <td align="center" style="background-color: #bd1f25; border-radius: 8px;">
                     <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 16px 48px; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none;">
                       ${ctaText}
                     </a>
@@ -167,11 +167,11 @@ export const generateNewsletterHTML = (data = {}) => {
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
                     <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">Tel:</span><br>
-                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
                     </p>
                     <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">E-Mail:</span><br>
-                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
                     </p>
                   </td>
                 </tr>
@@ -194,7 +194,7 @@ export const generateNewsletterHTML = (data = {}) => {
                 <tr>
                   <td align="center" style="padding-top: 16px; border-top: 1px solid #333333;">
                     <p style="margin: 0; font-size: 12px; color: #555555;">
-                      <a href="${unsubscribeUrl}" style="color: #bd1f22; text-decoration: underline;">Abmelden</a> | 
+                      <a href="${unsubscribeUrl}" style="color: #bd1f25; text-decoration: underline;">Abmelden</a> | 
                       <a href="https://tuningfiles-download.com/impressum" style="color: #666666; text-decoration: underline;">Impressum</a> | 
                       <a href="https://tuningfiles-download.com/datenschutz" style="color: #666666; text-decoration: underline;">Datenschutz</a>
                     </p>

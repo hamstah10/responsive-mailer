@@ -1,5 +1,5 @@
 // Welcome Email Template
-// Colors: #121212, #bd1f22, #171717
+// Colors: #121212, #bd1f25, #171717
 
 export const generateWelcomeHTML = (data = {}) => {
   const {
@@ -46,7 +46,7 @@ export const generateWelcomeHTML = (data = {}) => {
                     </div>
                     <h1 style="margin: 0 0 16px 0; font-size: 32px; font-weight: 700; color: #ffffff; line-height: 1.2;">
                       Willkommen bei<br>
-                      <span style="color: #bd1f22;">TuningFiles Download!</span>
+                      <span style="color: #bd1f25;">TuningFiles Download!</span>
                     </h1>
                     <p style="margin: 0; font-size: 18px; color: #a0a0a0; line-height: 1.6;">
                       Hallo ${customerName}, schön dass Sie dabei sind!
@@ -86,7 +86,7 @@ export const generateWelcomeHTML = (data = {}) => {
           ${features.map(feature => `
           <tr>
             <td style="background-color: #171717; padding: 0 40px 16px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 8px; border-left: 4px solid #bd1f22;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1f1f1f; border-radius: 8px; border-left: 4px solid #bd1f25;">
                 <tr>
                   <td style="padding: 20px;">
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
@@ -119,7 +119,7 @@ export const generateWelcomeHTML = (data = {}) => {
               </p>
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td align="center" style="background-color: #bd1f22; border-radius: 8px;">
+                  <td align="center" style="background-color: #bd1f25; border-radius: 8px;">
                     <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 18px 56px; font-size: 16px; font-weight: 600; color: #ffffff; text-decoration: none;">
                       🚀 Zum Shop
                     </a>
@@ -141,13 +141,13 @@ export const generateWelcomeHTML = (data = {}) => {
                     <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                       <tr>
                         <td width="33%" align="center" style="padding: 8px;">
-                          <a href="#" style="font-size: 14px; color: #bd1f22; text-decoration: none;">FAQ</a>
+                          <a href="#" style="font-size: 14px; color: #bd1f25; text-decoration: none;">FAQ</a>
                         </td>
                         <td width="33%" align="center" style="padding: 8px;">
-                          <a href="#" style="font-size: 14px; color: #bd1f22; text-decoration: none;">Anleitung</a>
+                          <a href="#" style="font-size: 14px; color: #bd1f25; text-decoration: none;">Anleitung</a>
                         </td>
                         <td width="33%" align="center" style="padding: 8px;">
-                          <a href="#" style="font-size: 14px; color: #bd1f22; text-decoration: none;">Kontakt</a>
+                          <a href="#" style="font-size: 14px; color: #bd1f25; text-decoration: none;">Kontakt</a>
                         </td>
                       </tr>
                     </table>
@@ -205,11 +205,11 @@ export const generateWelcomeHTML = (data = {}) => {
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Kontakt</p>
                     <p style="margin: 0 0 8px 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">Tel:</span><br>
-                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
+                      <a href="tel:+4917975111144" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">(0)179 / 75 111 44</a>
                     </p>
                     <p style="margin: 0; font-size: 13px; color: #a0a0a0;">
                       <span style="color: #666666;">E-Mail:</span><br>
-                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f22; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
+                      <a href="mailto:info@tuningfiles-download.com" style="font-size: 14px; color: #bd1f25; text-decoration: none; font-weight: 500;">info@tuningfiles-download.com</a>
                     </p>
                   </td>
                 </tr>

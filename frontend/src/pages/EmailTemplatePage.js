@@ -366,9 +366,9 @@ export const EmailTemplatePage = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-md" style={{ backgroundColor: '#bd1f22' }} />
+                    <div className="w-8 h-8 rounded-md" style={{ backgroundColor: '#bd1f25' }} />
                     <div>
-                      <p className="text-sm font-medium text-foreground">#bd1f22</p>
+                      <p className="text-sm font-medium text-foreground">#bd1f25</p>
                       <p className="text-xs text-muted-foreground">Akzent</p>
                     </div>
                   </div>
