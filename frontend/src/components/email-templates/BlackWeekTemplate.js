@@ -1,44 +1,27 @@
-// Black Week Angebot Email Template
+// Black Week Angebot Email Template - KESS3 Slave
 // Colors: #121212, #bd1f22, #171717
 
 export const generateBlackWeekHTML = (data = {}) => {
   const {
     logoUrl = 'https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png',
-    headline = 'BLACK WEEK',
-    subheadline = 'MEGA SALE',
-    discountText = 'BIS ZU 50% RABATT',
-    description = 'Sichere dir jetzt unglaubliche Rabatte auf alle unsere Tuning-Files! Nur für kurze Zeit.',
-    couponCode = 'BLACKWEEK50',
-    couponText = 'DEIN RABATTCODE:',
-    ctaText = 'JETZT SPAREN',
-    ctaUrl = 'https://tuningfiles-download.com',
-    validUntil = '30. November 2024',
-    features = [
-      { title: 'Stage 1 Tuning', discount: '30% RABATT', originalPrice: '149€', salePrice: '104€' },
-      { title: 'Stage 2 Tuning', discount: '40% RABATT', originalPrice: '249€', salePrice: '149€' },
-      { title: 'DPF/EGR Lösungen', discount: '50% RABATT', originalPrice: '199€', salePrice: '99€' }
-    ]
+    productImageUrl = 'https://blackfriday.tuningfiles-download.com/__l5e/assets-v1/fa5de819-408f-4e46-8855-b9a6d2c8328f/kess3-newsletter-original.png',
+    headline = 'BLACK FRIDAY',
+    subheadline = 'ALIENTECH',
+    mainTitle = 'Starten Sie mit Chiptuning.',
+    mainSubtitle = 'KESS3 Slave. Ihr Einstieg auf das nächste Level.',
+    badgeText = 'FÜR NEUKUNDEN · HARDWARE & FILESERVICE',
+    productName = 'KESS3 Slave',
+    originalPrice = '3.090,00 €',
+    salePrice = '1.690,00 €',
+    savings = '1.400,00 €',
+    creditsValue = '550,00 €',
+    creditsText = '5 kostenlose Datei-Credits',
+    featureText = 'Inklusive OBD, Bench und Boot für Pkw. Wir unterstützen Sie online beim Einstieg und beim ersten Auto.',
+    priceNote = 'Preisangaben netto, zzgl. gesetzlicher Mehrwertsteuer. Maßgeblich sind die finalen Konditionen im Shop.',
+    ctaText = 'JETZT ANGEBOT ANSEHEN',
+    ctaUrl = 'https://www.chiptuning-tools.shop/alientech/alientech-starter-paket',
+    tagline = 'Performance verbindet.'
   } = data;
-
-  const featureRows = features.map(f => `
-    <tr>
-      <td style="padding: 16px 20px; background-color: #1f1f1f; border-radius: 8px; margin-bottom: 12px;">
-        <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-          <tr>
-            <td width="60%" valign="middle">
-              <p style="margin: 0; font-size: 16px; font-weight: 600; color: #ffffff;">${f.title}</p>
-              <p style="margin: 4px 0 0 0; font-size: 12px; color: #bd1f22; font-weight: 700; text-transform: uppercase;">${f.discount}</p>
-            </td>
-            <td width="40%" valign="middle" align="right">
-              <p style="margin: 0; font-size: 13px; color: #666666; text-decoration: line-through;">${f.originalPrice}</p>
-              <p style="margin: 2px 0 0 0; font-size: 20px; color: #bd1f22; font-weight: 700;">${f.salePrice}</p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr><td style="height: 12px;"></td></tr>
-  `).join('');
 
   return `<!DOCTYPE html>
 <html lang="de" translate="no">
@@ -46,7 +29,7 @@ export const generateBlackWeekHTML = (data = {}) => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>BLACK WEEK - TuningFiles Download</title>
+  <title>BLACK FRIDAY - TuningFiles Download</title>
   <!--[if mso]>
   <noscript>
     <xml>
@@ -68,22 +51,26 @@ export const generateBlackWeekHTML = (data = {}) => {
           <!-- Header with Logo -->
           <tr>
             <td align="center" style="padding: 30px 40px; background-color: #171717; border-radius: 12px 12px 0 0;">
-              <img src="${logoUrl}" alt="TuningFiles Download" width="180" style="display: block; max-width: 180px; height: auto;">
+              <img src="${logoUrl}" alt="TuningFiles Download" width="200" style="display: block; max-width: 200px; height: auto;">
             </td>
           </tr>
           
-          <!-- BLACK WEEK Banner -->
+          <!-- BLACK FRIDAY / ALIENTECH Banner -->
           <tr>
             <td style="background: linear-gradient(135deg, #bd1f22 0%, #8a1618 50%, #121212 100%); padding: 0;">
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
-                  <td align="center" style="padding: 40px 30px;">
-                    <!-- Headline -->
-                    <h1 style="margin: 0; font-size: 48px; font-weight: 900; color: #ffffff; letter-spacing: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
-                      ${headline}
+                  <td align="center" style="padding: 50px 30px;">
+                    <!-- Subheadline -->
+                    <p style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.8); letter-spacing: 4px; text-transform: uppercase;">
+                      ${headline} / ${subheadline}
+                    </p>
+                    <!-- Main Title -->
+                    <h1 style="margin: 0; font-size: 36px; font-weight: 900; color: #ffffff; line-height: 1.2;">
+                      ${mainTitle}
                     </h1>
-                    <p style="margin: 8px 0 0 0; font-size: 28px; font-weight: 700; color: #ffffff; letter-spacing: 4px;">
-                      ${subheadline}
+                    <p style="margin: 12px 0 0 0; font-size: 18px; font-weight: 500; color: rgba(255,255,255,0.9);">
+                      ${mainSubtitle}
                     </p>
                   </td>
                 </tr>
@@ -91,79 +78,37 @@ export const generateBlackWeekHTML = (data = {}) => {
             </td>
           </tr>
           
-          <!-- Discount Highlight Box -->
+          <!-- Badge -->
           <tr>
-            <td style="background-color: #171717; padding: 0 40px;">
+            <td style="background-color: #171717; padding: 25px 40px 15px 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
-                  <td align="center" style="padding: 30px; background-color: #0d0d0d; border: 2px dashed #bd1f22; border-radius: 12px; margin-top: -20px;">
-                    <p style="margin: 0; font-size: 32px; font-weight: 900; color: #bd1f22; letter-spacing: 2px;">
-                      ${discountText}
-                    </p>
-                    <p style="margin: 12px 0 0 0; font-size: 14px; color: #888888;">
-                      Gültig bis ${validUntil}
-                    </p>
+                  <td align="center">
+                    <span style="display: inline-block; padding: 8px 20px; background-color: #bd1f22; border-radius: 4px; font-size: 11px; font-weight: 700; color: #ffffff; letter-spacing: 1px; text-transform: uppercase;">
+                      ${badgeText}
+                    </span>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
           
-          <!-- Description -->
+          <!-- Product Image -->
           <tr>
-            <td style="background-color: #171717; padding: 30px 40px;">
-              <p style="margin: 0; font-size: 16px; color: #cccccc; line-height: 1.7; text-align: center;">
-                ${description}
-              </p>
-            </td>
-          </tr>
-          
-          <!-- Featured Offers -->
-          <tr>
-            <td style="background-color: #171717; padding: 10px 40px 30px 40px;">
-              <p style="margin: 0 0 20px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 2px; text-align: center;">
-                ★ TOP ANGEBOTE ★
-              </p>
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                ${featureRows}
-              </table>
-            </td>
-          </tr>
-          
-          <!-- Coupon Code Box -->
-          <tr>
-            <td style="background-color: #171717; padding: 0 40px 30px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                  <td align="center" style="padding: 25px; background-color: #1a1a1a; border: 1px solid #333333; border-radius: 12px;">
-                    <p style="margin: 0 0 10px 0; font-size: 12px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">
-                      ${couponText}
-                    </p>
-                    <table role="presentation" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="padding: 12px 30px; background-color: #bd1f22; border-radius: 8px;">
-                          <p style="margin: 0; font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 4px; font-family: 'Courier New', monospace;">
-                            ${couponCode}
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-                    <p style="margin: 12px 0 0 0; font-size: 11px; color: #555555;">
-                      Rabattcode beim Checkout eingeben
-                    </p>
-                  </td>
-                </tr>
-              </table>
+            <td style="background-color: #171717; padding: 20px 40px;">
+              <a href="${ctaUrl}" target="_blank" style="display: block; text-decoration: none;">
+                <img src="${productImageUrl}" alt="${productName}" width="520" style="display: block; width: 100%; max-width: 520px; height: auto; border-radius: 12px; border: 2px solid #333333;">
+              </a>
             </td>
           </tr>
           
           <!-- CTA Button -->
           <tr>
-            <td align="center" style="background-color: #171717; padding: 10px 40px 40px 40px;">
+            <td align="center" style="background-color: #171717; padding: 20px 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="border-radius: 8px; background: linear-gradient(135deg, #bd1f22 0%, #9a1a1c 100%); box-shadow: 0 4px 15px rgba(189, 31, 34, 0.4);">
-                    <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 18px 50px; font-size: 18px; font-weight: 700; color: #ffffff; text-decoration: none; letter-spacing: 2px;">
+                    <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 14px; font-weight: 700; color: #ffffff; text-decoration: none; letter-spacing: 1px;">
                       ${ctaText} →
                     </a>
                   </td>
@@ -172,14 +117,67 @@ export const generateBlackWeekHTML = (data = {}) => {
             </td>
           </tr>
           
-          <!-- Urgency Banner -->
+          <!-- Product Details Box -->
           <tr>
-            <td style="background-color: #171717; padding: 0 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <td style="background-color: #171717; padding: 20px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #1a1a1a; border: 1px solid #333333; border-radius: 12px;">
                 <tr>
-                  <td align="center" style="padding: 15px; background-color: #1f1f1f; border-radius: 8px;">
-                    <p style="margin: 0; font-size: 13px; color: #bd1f22; font-weight: 600;">
-                      ⏰ Nur noch wenige Tage! Nicht verpassen!
+                  <td style="padding: 30px;">
+                    <!-- Product Badge -->
+                    <p style="margin: 0 0 8px 0; font-size: 11px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">
+                      FÜR NEUKUNDEN · HARDWARE
+                    </p>
+                    
+                    <!-- Product Name -->
+                    <h2 style="margin: 0 0 20px 0; font-size: 28px; font-weight: 700; color: #ffffff;">
+                      ${productName}
+                    </h2>
+                    
+                    <!-- Price Table -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <td style="padding: 8px 0; border-bottom: 1px solid #333333;">
+                          <span style="font-size: 14px; color: #888888;">Regulärer Paketwert inklusive Credits</span>
+                        </td>
+                        <td align="right" style="padding: 8px 0; border-bottom: 1px solid #333333;">
+                          <span style="font-size: 14px; color: #666666; text-decoration: line-through;">${originalPrice}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #333333;">
+                          <span style="font-size: 16px; font-weight: 600; color: #ffffff;">Aktionspreis</span>
+                        </td>
+                        <td align="right" style="padding: 12px 0; border-bottom: 1px solid #333333;">
+                          <span style="font-size: 24px; font-weight: 700; color: #bd1f22;">${salePrice}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding: 12px 0; border-bottom: 1px solid #333333;">
+                          <span style="font-size: 14px; font-weight: 600; color: #22c55e;">Ihr Gesamtvorteil</span>
+                        </td>
+                        <td align="right" style="padding: 12px 0; border-bottom: 1px solid #333333;">
+                          <span style="font-size: 18px; font-weight: 700; color: #22c55e;">${savings}</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" style="padding: 16px 0 0 0;">
+                          <div style="display: inline-block; padding: 10px 16px; background-color: #0d3320; border-radius: 6px;">
+                            <span style="font-size: 13px; color: #22c55e; font-weight: 600;">
+                              ✓ ${creditsText} im Wert von ${creditsValue}
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                    
+                    <!-- Features -->
+                    <p style="margin: 20px 0 0 0; font-size: 14px; color: #a0a0a0; line-height: 1.6;">
+                      ${featureText}
+                    </p>
+                    
+                    <!-- Price Note -->
+                    <p style="margin: 16px 0 0 0; font-size: 11px; color: #666666; font-style: italic;">
+                      ${priceNote}
                     </p>
                   </td>
                 </tr>
@@ -187,9 +185,18 @@ export const generateBlackWeekHTML = (data = {}) => {
             </td>
           </tr>
           
+          <!-- Tagline -->
+          <tr>
+            <td align="center" style="background-color: #171717; padding: 30px 40px;">
+              <p style="margin: 0; font-size: 14px; color: #888888; font-style: italic;">
+                tuningfiles-download.com · ${tagline}
+              </p>
+            </td>
+          </tr>
+          
           <!-- Divider -->
           <tr>
-            <td style="background-color: #171717; padding: 30px 40px;">
+            <td style="background-color: #171717; padding: 0 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td style="border-top: 1px solid #333333;"></td>
@@ -200,7 +207,7 @@ export const generateBlackWeekHTML = (data = {}) => {
           
           <!-- Social Links -->
           <tr>
-            <td align="center" style="background-color: #171717; padding: 0 40px 30px 40px;">
+            <td align="center" style="background-color: #171717; padding: 30px 40px;">
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center" style="padding: 0 12px;">
