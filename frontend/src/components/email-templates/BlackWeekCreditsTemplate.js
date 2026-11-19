@@ -9,7 +9,7 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
     mainTitle = '15% auf alle Credits',
     mainSubtitle = 'Ihr Treue-Bonus. Nur diese Woche.',
     greeting = 'Hallo',
-    customerName = 'geschätzter Kunde',
+    customerName = '{{ .Subscriber.FirstName | default "geschätzter Kunde" }}',
     introText = 'Als treuer Kunde erhalten Sie diese Woche exklusiven Zugang zu unserem Black Week Special:',
     discountBadge = '15% RABATT',
     discountText = 'auf alle Credit-Pakete',

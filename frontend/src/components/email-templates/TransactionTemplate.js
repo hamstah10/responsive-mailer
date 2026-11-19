@@ -4,7 +4,7 @@
 export const generateTransactionHTML = (data = {}) => {
   const {
     logoUrl = 'https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png',
-    customerName = 'Max Mustermann',
+    customerName = '{{ .Subscriber.FirstName | default "Kunde" }}',
     orderNumber = 'TF-2024-001234',
     orderDate = new Date().toLocaleDateString('de-DE'),
     items = [

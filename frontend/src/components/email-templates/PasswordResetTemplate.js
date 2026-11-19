@@ -4,7 +4,7 @@
 export const generatePasswordResetHTML = (data = {}) => {
   const {
     logoUrl = 'https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png',
-    customerName = 'Max',
+    customerName = '{{ .Subscriber.FirstName | default "Kunde" }}',
     resetUrl = 'https://tuningfiles-download.com/reset?token=abc123',
     expiryTime = '24 Stunden',
     supportEmail = 'support@tuningfiles-download.com'

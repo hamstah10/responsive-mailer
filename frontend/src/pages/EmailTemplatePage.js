@@ -56,16 +56,16 @@ const defaultTemplateData = {
   },
   transaction: {
     orderNumber: 'TFD-2024-001234',
-    customerName: 'Max Mustermann',
+    customerName: '{{ .Subscriber.FirstName | default "Kunde" }}',
     orderTotal: '149,00 €'
   },
   welcome: {
-    customerName: 'Max Mustermann',
+    customerName: '{{ .Subscriber.FirstName | default "Kunde" }}',
     ctaText: 'Jetzt starten',
     ctaUrl: 'https://tuningfiles-download.com'
   },
   password: {
-    customerName: 'Max Mustermann',
+    customerName: '{{ .Subscriber.FirstName | default "Kunde" }}',
     resetLink: 'https://tuningfiles-download.com/reset/token123',
     validityTime: '24 Stunden'
   },
@@ -75,7 +75,7 @@ const defaultTemplateData = {
     mainTitle: '15% auf alle Credits',
     mainSubtitle: 'Ihr Treue-Bonus. Nur diese Woche.',
     greeting: 'Hallo',
-    customerName: 'geschätzter Kunde',
+    customerName: '{{ .Subscriber.FirstName | default "geschätzter Kunde" }}',
     introText: 'Als treuer Kunde erhalten Sie diese Woche exklusiven Zugang zu unserem Black Week Special:',
     discountBadge: '15% RABATT',
     discountText: 'auf alle Credit-Pakete',
@@ -1078,6 +1078,29 @@ export const EmailTemplatePage = () => {
                     <div>
                       <p className="font-medium text-foreground">Inline CSS</p>
                       <p className="text-xs text-muted-foreground">Sofort einsatzbereit</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Listmonk Variables Info */}
+              <Card className="bg-card border-border md:col-span-3">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 rounded-lg bg-purple-500/10">
+                      <Tag className="h-5 w-5 text-purple-500" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium text-foreground mb-2">Listmonk Personalisierung</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <code className="bg-muted px-2 py-1 rounded text-muted-foreground">{'{{ .Subscriber.FirstName }}'}</code>
+                        <code className="bg-muted px-2 py-1 rounded text-muted-foreground">{'{{ .Subscriber.LastName }}'}</code>
+                        <code className="bg-muted px-2 py-1 rounded text-muted-foreground">{'{{ .Subscriber.Email }}'}</code>
+                        <code className="bg-muted px-2 py-1 rounded text-muted-foreground">{'{{ .Subscriber.Name }}'}</code>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Mit <code className="bg-muted px-1 rounded">{'| default "Fallback"'}</code> für Standardwerte
+                      </p>
                     </div>
                   </div>
                 </CardContent>
