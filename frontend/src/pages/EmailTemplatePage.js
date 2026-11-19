@@ -388,13 +388,13 @@ export const EmailTemplatePage = () => {
               </span>
             </div>
             <div className="flex items-center gap-4">
-              <a href="https://instagram.com/tuningfiles" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/tuningfilesdownloadcom" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 Instagram
               </a>
-              <a href="https://facebook.com/tuningfiles" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/tuningfilesdownload" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 Facebook
               </a>
-              <a href="https://wa.me/tuningfiles" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://wa.me/491797511144" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 WhatsApp
               </a>
             </div>

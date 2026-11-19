@@ -153,17 +153,17 @@ export const generatePasswordResetHTML = (data = {}) => {
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center" style="padding: 0 12px;">
-                    <a href="https://instagram.com/tuningfiles" target="_blank">
+                    <a href="https://www.instagram.com/tuningfilesdownloadcom" target="_blank">
                       <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" width="28" height="28" style="display: block;">
                     </a>
                   </td>
                   <td align="center" style="padding: 0 12px;">
-                    <a href="https://facebook.com/tuningfiles" target="_blank">
+                    <a href="https://www.facebook.com/tuningfilesdownload" target="_blank">
                       <img src="https://cdn-icons-png.flaticon.com/512/174/174848.png" alt="Facebook" width="28" height="28" style="display: block;">
                     </a>
                   </td>
                   <td align="center" style="padding: 0 12px;">
-                    <a href="https://wa.me/tuningfiles" target="_blank">
+                    <a href="https://wa.me/491797511144" target="_blank">
                       <img src="https://cdn-icons-png.flaticon.com/512/174/174879.png" alt="WhatsApp" width="28" height="28" style="display: block;">
                     </a>
                   </td>
