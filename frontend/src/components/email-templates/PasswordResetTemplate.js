@@ -11,7 +11,7 @@ export const generatePasswordResetHTML = (data = {}) => {
   } = data;
 
   return `<!DOCTYPE html>
-<html lang="de">
+<html lang="de" translate="no">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -179,7 +179,7 @@ export const generatePasswordResetHTML = (data = {}) => {
                 <tr>
                   <td width="50%" style="padding: 0 20px 0 0; border-right: 1px solid #333333;" valign="top">
                     <p style="margin: 0 0 4px 0; font-size: 11px; color: #666666; text-transform: uppercase; letter-spacing: 1px;">Adresse</p>
-                    <p style="margin: 0 0 6px 0; font-size: 15px; font-weight: 600; color: #ffffff;">
+                    <p style="margin: 0 0 6px 0; font-size: 15px; font-weight: 600; color: #ffffff;" translate="no">
                       tuningfiles-download.com
                     </p>
                     <p style="margin: 0; font-size: 13px; color: #a0a0a0; line-height: 1.5;">
