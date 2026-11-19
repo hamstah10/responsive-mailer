@@ -118,7 +118,7 @@ export const EmailTemplatePage = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">
               <img 
-                src="https://customer-assets.emergentagent.com/job_2fe42aa5-9907-4512-808b-ab78c4c0f3e9/artifacts/o55o7ha0_logo_tuning.png" 
+                src="https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png" 
                 alt="TuningFiles Download" 
                 className="h-8 w-auto"
               />
@@ -379,7 +379,7 @@ export const EmailTemplatePage = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <img 
-                src="https://customer-assets.emergentagent.com/job_2fe42aa5-9907-4512-808b-ab78c4c0f3e9/artifacts/o55o7ha0_logo_tuning.png" 
+                src="https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png" 
                 alt="TuningFiles Download" 
                 className="h-6 w-auto opacity-60"
               />

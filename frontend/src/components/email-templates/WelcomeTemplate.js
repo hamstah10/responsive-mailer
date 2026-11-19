@@ -3,7 +3,7 @@
 
 export const generateWelcomeHTML = (data = {}) => {
   const {
-    logoUrl = 'https://customer-assets.emergentagent.com/job_2fe42aa5-9907-4512-808b-ab78c4c0f3e9/artifacts/o55o7ha0_logo_tuning.png',
+    logoUrl = 'https://customer-assets-rejwkqb3.emergentagent.net/job_responsive-mailer-3--6zpp8ape/artifacts/9e30b039835ace86_Tuning-Files-Logo-Weiss-500px-breite-1.png',
     customerName = 'Max',
     ctaUrl = 'https://tuningfiles-download.com/shop',
     features = [
