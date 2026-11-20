@@ -35,13 +35,14 @@ def cleanup():
         requests.delete(f"{url}/api/templates/{tid}", auth=auth, timeout=20)
 
 
-# Placeholder removal in template source files
-def test_no_content_placeholder_in_template_files():
-    files = glob.glob('/app/frontend/src/components/email-templates/*.js')
-    assert files
+# Every template file must contain the Listmonk content placeholder exactly once (required by Listmonk)
+def test_content_placeholder_exactly_once_in_template_files():
+    files = [f for f in glob.glob('/app/frontend/src/components/email-templates/*Template.js')]
+    assert len(files) >= 7
     pat = re.compile(r'\{\{\s*template\s+"content"\s+\.\s*\}\}')
-    offenders = [f for f in files if pat.search(open(f).read())]
-    assert offenders == [], f"Placeholder found in {offenders}"
+    bad = {f: len(pat.findall(open(f).read())) for f in files}
+    bad = {f: c for f, c in bad.items() if c != 1}
+    assert bad == {}, f"Placeholder count != 1 in {bad}"
 
 
 # Connection
@@ -64,9 +65,9 @@ def _count(name):
     return [t for t in r.json()["data"] if t["name"] == name]
 
 
-# Create then upsert (no duplicate) - body WITHOUT content placeholder (as app now sends)
+# Create then upsert (no duplicate) - body with hidden-div placeholder (as app now sends)
 def test_create_then_update_no_duplicate():
-    body1 = "<html><body><h1>TEST v1</h1></body></html>"
+    body1 = '<html><body><h1>TEST v1</h1><div style="display:none">{{ template "content" . }}</div></body></html>'
     r1 = requests.post(f"{BASE_URL}/api/listmonk/templates", json={
         "template_name": TEST_NAME, "template_body": body1, "template_type": "campaign"}, timeout=60)
     print("create:", r1.status_code, r1.text[:400])
@@ -76,7 +77,7 @@ def test_create_then_update_no_duplicate():
     assert "erstellt" in r1.json()["message"]
     first_id = r1.json()["template_id"]
 
-    body2 = "<html><body><h1>TEST v2</h1></body></html>"
+    body2 = '<html><body><h1>TEST v2</h1><div style="display:none">{{ template "content" . }}</div></body></html>'
     r2 = requests.post(f"{BASE_URL}/api/listmonk/templates", json={
         "template_name": TEST_NAME, "template_body": body2, "template_type": "campaign"}, timeout=60)
     print("update:", r2.status_code, r2.text[:400])
@@ -111,3 +112,4 @@ def test_put_endpoint_invalid_id():
 def test_validation_missing_fields():
     r = requests.post(f"{BASE_URL}/api/listmonk/templates", json={"template_name": "TEST_y"}, timeout=30)
     assert r.status_code == 422
+
