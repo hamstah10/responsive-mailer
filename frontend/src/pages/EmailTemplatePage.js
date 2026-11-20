@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
 import { toast } from 'sonner';
 import {
   NewsletterTemplate,
@@ -28,6 +29,30 @@ const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const CountdownFields = ({ data, onChange }) => (
   <>
+    <div className="md:col-span-2 flex items-center justify-between rounded-lg border border-red-900/60 bg-red-950/20 p-4">
+      <div>
+        <Label htmlFor="lastChance" className="text-base">Letzte Chance (Erinnerung)</Label>
+        <p className="text-xs text-muted-foreground mt-1">Roter Dringlichkeits-Balken oben und Button „JETZT NOCH SICHERN“</p>
+      </div>
+      <Switch
+        id="lastChance"
+        data-testid="last-chance-switch"
+        checked={!!data.lastChance}
+        onCheckedChange={(v) => onChange('lastChance', v)}
+      />
+    </div>
+    {data.lastChance && (
+      <div className="space-y-2 md:col-span-2">
+        <Label htmlFor="urgencyText">Text im Dringlichkeits-Balken</Label>
+        <Input
+          id="urgencyText"
+          data-testid="urgency-text-input"
+          value={data.urgencyText || ''}
+          onChange={(e) => onChange('urgencyText', e.target.value)}
+          placeholder="Leer lassen = automatisch aus dem Enddatum"
+        />
+      </div>
+    )}
     <div className="space-y-2">
       <Label htmlFor="countdownEnd">Countdown: Aktion endet am</Label>
       <Input
@@ -346,7 +371,7 @@ export const EmailTemplatePage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          template_name: `TFD - ${selectedTemplate.name}`,
+          template_name: `TFD - ${selectedTemplate.name}${currentData.lastChance ? ' - Letzte Chance' : ''}`,
           template_body: html,
           template_type: 'campaign'
         })

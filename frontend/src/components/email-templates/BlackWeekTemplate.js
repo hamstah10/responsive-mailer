@@ -1,6 +1,6 @@
 // Black Week Angebot Email Template - KESS3 Slave
 // Colors: #121212, #bd1f25, #171717
-import { generateCountdownBlock } from './countdownBlock';
+import { generateCountdownBlock, generateUrgencyBar, LAST_CHANCE_CTA } from './countdownBlock';
 
 export const generateBlackWeekHTML = (data = {}) => {
   const {
@@ -23,7 +23,9 @@ export const generateBlackWeekHTML = (data = {}) => {
     ctaUrl = 'https://www.chiptuning-tools.shop/alientech/alientech-starter-paket',
     tagline = 'Performance verbindet.',
     countdownEnd = '2026-11-30T23:59',
-    countdownLabel = 'NUR NOCH'
+    countdownLabel = 'NUR NOCH',
+    lastChance = false,
+    urgencyText = ''
   } = data;
 
   return `<!DOCTYPE html>
@@ -51,9 +53,10 @@ export const generateBlackWeekHTML = (data = {}) => {
         <!-- Email Container -->
         <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%;">
           
+          ${generateUrgencyBar({ lastChance, urgencyText, countdownEnd })}
           <!-- Header with Logo -->
           <tr>
-            <td align="center" style="padding: 30px 40px; background-color: #171717; border-radius: 12px 12px 0 0;">
+            <td align="center" style="padding: 30px 40px; background-color: #171717; border-radius: ${lastChance ? '0' : '12px 12px 0 0'};">
               <img src="${logoUrl}" alt="TuningFiles Download" width="200" style="display: block; max-width: 200px; height: auto;">
             </td>
           </tr>
@@ -112,7 +115,7 @@ export const generateBlackWeekHTML = (data = {}) => {
                 <tr>
                   <td style="border-radius: 8px; background: linear-gradient(135deg, #bd1f25 0%, #9a1a1c 100%); box-shadow: 0 4px 15px rgba(189, 31, 34, 0.4);">
                     <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 14px; font-weight: 700; color: #ffffff; text-decoration: none; letter-spacing: 1px;" translate="no">
-                      ${ctaText} →
+                      ${lastChance ? LAST_CHANCE_CTA : ctaText} →
                     </a>
                   </td>
                 </tr>

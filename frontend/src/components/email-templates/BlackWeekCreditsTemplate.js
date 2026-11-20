@@ -1,6 +1,6 @@
 // Black Week Credits Template - Für Bestandskunden
 // Colors: #121212, #bd1f25, #171717
-import { generateCountdownBlock } from './countdownBlock';
+import { generateCountdownBlock, generateUrgencyBar, LAST_CHANCE_CTA } from './countdownBlock';
 
 export const generateBlackWeekCreditsHTML = (data = {}) => {
   const {
@@ -36,7 +36,9 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
     ctaText = 'JETZT IM PORTAL EINLOGGEN',
     ctaUrl = 'https://portal.tuningfiles-download.com/',
     footerNote = 'Der Rabatt wird automatisch im Portal angezeigt. Keine Code-Eingabe nötig.',
-    tagline = 'Performance verbindet.'
+    tagline = 'Performance verbindet.',
+    lastChance = false,
+    urgencyText = ''
   } = data;
 
   const packageRows = creditPackages.map((pkg, index) => `
@@ -95,9 +97,10 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
       <td align="center" style="padding: 40px 20px;">
         <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%;">
           
+          ${generateUrgencyBar({ lastChance, urgencyText, countdownEnd })}
           <!-- Header with Logo -->
           <tr>
-            <td align="center" style="padding: 30px 40px; background-color: #171717; border-radius: 12px 12px 0 0;">
+            <td align="center" style="padding: 30px 40px; background-color: #171717; border-radius: ${lastChance ? '0' : '12px 12px 0 0'};">
               <img src="${logoUrl}" alt="TuningFiles Download" width="200" style="display: block; max-width: 200px; height: auto;">
             </td>
           </tr>
@@ -194,7 +197,7 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
                 <tr>
                   <td style="border-radius: 12px; background: linear-gradient(135deg, #bd1f25 0%, #9a1a1c 100%); box-shadow: 0 6px 20px rgba(189, 31, 37, 0.4);">
                     <a href="${ctaUrl}" target="_blank" style="display: inline-block; padding: 20px 50px; font-size: 16px; font-weight: 700; color: #ffffff; text-decoration: none; letter-spacing: 1px;" translate="no">
-                      ${ctaText} →
+                      ${lastChance ? LAST_CHANCE_CTA : ctaText} →
                     </a>
                   </td>
                 </tr>

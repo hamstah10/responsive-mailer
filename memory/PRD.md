@@ -86,3 +86,7 @@ Erstellen von responsiven E-Mail-Templates für TuningFiles Download.
 ## 2026-06 – Countdown Banner
 - Static countdown block (Tage/Stunden/Minuten + "Aktion endet am ...") in Black Week KESS3 (after badge) and Black Week Credits (replaces old "Gültig bis" box). Shared helper: components/email-templates/countdownBlock.js
 - Editable in editor: countdownEnd (datetime-local, default 2026-11-30T23:59), countdownLabel (default "NUR NOCH"). Values computed at render/export time; shows "AKTION BEENDET" after end.
+
+## 2026-06 – Letzte Chance Schalter
+- Toggle "Letzte Chance (Erinnerung)" in editor for both Black Week templates (data.lastChance): red urgency bar on top (auto text "LETZTE CHANCE – Endet am <countdownEnd>" or custom urgencyText) + CTA becomes "JETZT NOCH SICHERN".
+- Listmonk export name gets suffix " - Letzte Chance" when toggle is on (so it doesn't overwrite the normal version).

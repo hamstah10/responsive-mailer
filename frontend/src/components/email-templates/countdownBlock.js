@@ -4,6 +4,23 @@ const pad = (n) => String(n).padStart(2, '0');
 const formatEnd = (end) =>
   `${pad(end.getDate())}.${pad(end.getMonth() + 1)}.${end.getFullYear()}, ${pad(end.getHours())}:${pad(end.getMinutes())} Uhr`;
 
+export const LAST_CHANCE_CTA = 'JETZT NOCH SICHERN';
+
+export const generateUrgencyBar = ({ lastChance, urgencyText, countdownEnd = '2026-11-30T23:59' } = {}) => {
+  if (!lastChance) return '';
+  const end = new Date(countdownEnd);
+  const text = urgencyText || (isNaN(end.getTime())
+    ? 'LETZTE CHANCE – Endet heute'
+    : `LETZTE CHANCE – Endet am ${formatEnd(end)}`);
+  return `
+          <!-- Urgency Bar -->
+          <tr>
+            <td align="center" style="background-color: #bd1f25; padding: 12px 20px; border-radius: 12px 12px 0 0;">
+              <p style="margin: 0; font-size: 14px; font-weight: 800; color: #ffffff; letter-spacing: 1px; text-transform: uppercase;" translate="no">⚠ ${text}</p>
+            </td>
+          </tr>`;
+};
+
 export const generateCountdownBlock = ({ countdownEnd = '2026-11-30T23:59', countdownLabel = 'NUR NOCH', paddingTop = 0 } = {}) => {
   const end = new Date(countdownEnd);
   if (isNaN(end.getTime())) return '';
