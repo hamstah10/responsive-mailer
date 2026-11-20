@@ -1,5 +1,6 @@
 // Black Week Angebot Email Template - KESS3 Slave
 // Colors: #121212, #bd1f25, #171717
+import { generateCountdownBlock } from './countdownBlock';
 
 export const generateBlackWeekHTML = (data = {}) => {
   const {
@@ -20,7 +21,9 @@ export const generateBlackWeekHTML = (data = {}) => {
     priceNote = 'Preisangaben netto, zzgl. gesetzlicher Mehrwertsteuer. Maßgeblich sind die finalen Konditionen im Shop.',
     ctaText = 'JETZT ANGEBOT ANSEHEN',
     ctaUrl = 'https://www.chiptuning-tools.shop/alientech/alientech-starter-paket',
-    tagline = 'Performance verbindet.'
+    tagline = 'Performance verbindet.',
+    countdownEnd = '2026-11-30T23:59',
+    countdownLabel = 'NUR NOCH'
   } = data;
 
   return `<!DOCTYPE html>
@@ -92,7 +95,7 @@ export const generateBlackWeekHTML = (data = {}) => {
               </table>
             </td>
           </tr>
-          
+          ${generateCountdownBlock({ countdownEnd, countdownLabel, paddingTop: 10 })}
           <!-- Product Image -->
           <tr>
             <td style="background-color: #171717; padding: 20px 40px;">

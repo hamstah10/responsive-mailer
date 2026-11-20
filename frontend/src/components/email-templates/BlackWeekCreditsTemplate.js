@@ -1,5 +1,6 @@
 // Black Week Credits Template - Für Bestandskunden
 // Colors: #121212, #bd1f25, #171717
+import { generateCountdownBlock } from './countdownBlock';
 
 export const generateBlackWeekCreditsHTML = (data = {}) => {
   const {
@@ -13,7 +14,8 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
     introText = 'Als treuer Kunde erhalten Sie diese Woche exklusiven Zugang zu unserem Black Week Special:',
     discountBadge = '15% BONUS',
     discountText = 'Extra-Credits geschenkt',
-    validUntil = 'Gültig bis Sonntag, 23:59 Uhr',
+    countdownEnd = '2026-11-30T23:59',
+    countdownLabel = 'NUR NOCH',
     creditPackages = [
       { name: '100 Credits', price: '115,00 €', bonus: '+15 Credits', bonusValue: 'Wert: 17,25 €' },
       { name: '200 Credits', price: '225,00 €', bonus: '+30 Credits', bonusValue: 'Wert: 33,75 €' },
@@ -171,20 +173,7 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
             </td>
           </tr>
           
-          <!-- Validity Timer -->
-          <tr>
-            <td style="background-color: #171717; padding: 0 40px 25px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                  <td align="center" style="padding: 12px 20px; background-color: #1a1a1a; border-radius: 8px; border: 1px dashed #333333;">
-                    <p style="margin: 0; font-size: 13px; color: #888888;">
-                      ⏰ <span style="color: #bd1f25; font-weight: 600;">${validUntil}</span>
-                    </p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+          ${generateCountdownBlock({ countdownEnd, countdownLabel })}
           
           <!-- Credit Packages -->
           <tr>

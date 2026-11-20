@@ -82,3 +82,7 @@ Erstellen von responsiven E-Mail-Templates für TuningFiles Download.
 ### P2 - Future
 - [ ] Export als .eml Datei
 - [ ] Direkte Integration mit E-Mail-Service
+
+## 2026-06 – Countdown Banner
+- Static countdown block (Tage/Stunden/Minuten + "Aktion endet am ...") in Black Week KESS3 (after badge) and Black Week Credits (replaces old "Gültig bis" box). Shared helper: components/email-templates/countdownBlock.js
+- Editable in editor: countdownEnd (datetime-local, default 2026-11-30T23:59), countdownLabel (default "NUR NOCH"). Values computed at render/export time; shows "AKTION BEENDET" after end.

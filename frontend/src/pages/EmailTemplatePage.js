@@ -26,6 +26,31 @@ import {
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
+const CountdownFields = ({ data, onChange }) => (
+  <>
+    <div className="space-y-2">
+      <Label htmlFor="countdownEnd">Countdown: Aktion endet am</Label>
+      <Input
+        id="countdownEnd"
+        data-testid="countdown-end-input"
+        type="datetime-local"
+        value={data.countdownEnd || ''}
+        onChange={(e) => onChange('countdownEnd', e.target.value)}
+      />
+    </div>
+    <div className="space-y-2">
+      <Label htmlFor="countdownLabel">Countdown Überschrift</Label>
+      <Input
+        id="countdownLabel"
+        data-testid="countdown-label-input"
+        value={data.countdownLabel || ''}
+        onChange={(e) => onChange('countdownLabel', e.target.value)}
+        placeholder="NUR NOCH"
+      />
+    </div>
+  </>
+);
+
 // Default editable content for each template
 const defaultTemplateData = {
   blackweek: {
@@ -42,7 +67,9 @@ const defaultTemplateData = {
     creditsText: '5 Tuningfiles inklusive',
     featureText: 'Inklusive OBD, Bench und Boot für Pkw. Wir unterstützen Sie online beim Einstieg und beim ersten Auto.',
     ctaText: 'JETZT ANGEBOT ANSEHEN',
-    ctaUrl: 'https://www.chiptuning-tools.shop/alientech/alientech-starter-paket'
+    ctaUrl: 'https://www.chiptuning-tools.shop/alientech/alientech-starter-paket',
+    countdownEnd: '2026-11-30T23:59',
+    countdownLabel: 'NUR NOCH'
   },
   basic: {
     headline: 'Ihre Überschrift hier',
@@ -79,7 +106,8 @@ const defaultTemplateData = {
     introText: 'Als treuer Kunde erhalten Sie diese Woche exklusiven Zugang zu unserem Black Week Special:',
     discountBadge: '15% BONUS',
     discountText: 'Extra-Credits geschenkt',
-    validUntil: 'Gültig bis Sonntag, 23:59 Uhr',
+    countdownEnd: '2026-11-30T23:59',
+    countdownLabel: 'NUR NOCH',
     ctaText: 'JETZT IM PORTAL EINLOGGEN',
     ctaUrl: 'https://portal.tuningfiles-download.com/'
   }
@@ -794,6 +822,7 @@ export const EmailTemplatePage = () => {
                             placeholder="1.400,00 €"
                           />
                         </div>
+                        <CountdownFields data={currentData} onChange={handleDataChange} />
                         <div className="space-y-2">
                           <Label htmlFor="creditsText">Credits Text</Label>
                           <Input
@@ -908,15 +937,7 @@ export const EmailTemplatePage = () => {
                             placeholder="15% RABATT"
                           />
                         </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="validUntil">Gültig bis</Label>
-                          <Input
-                            id="validUntil"
-                            value={currentData.validUntil || ''}
-                            onChange={(e) => handleDataChange('validUntil', e.target.value)}
-                            placeholder="Gültig bis Sonntag, 23:59 Uhr"
-                          />
-                        </div>
+                        <CountdownFields data={currentData} onChange={handleDataChange} />
                         <div className="space-y-2">
                           <Label htmlFor="ctaText">Button Text</Label>
                           <Input
