@@ -290,7 +290,7 @@ export const generateBlackWeekHTML = (data = {}) => {
                       © ${new Date().getFullYear()} TuningFiles Download. Alle Rechte vorbehalten.
                     </p>
                     <p style="margin: 16px 0 0 0; font-size: 11px;">
-                      <a href="{{ .UnsubscribeURL }}" style="color: #555555; text-decoration: underline;">Newsletter abmelden</a>
+                      <a href="{{ UnsubscribeURL }}" style="color: #555555; text-decoration: underline;">Newsletter abmelden</a>
                     </p>
                   </td>
                 </tr>

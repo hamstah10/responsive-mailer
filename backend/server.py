@@ -155,54 +155,33 @@ async def create_or_update_listmonk_template(template: ListmonkTemplateCreate):
     try:
         api_url, auth = get_listmonk_auth()
         
-        # First, check if template with same name already exists
+        # Never overwrite: pick a free name ("Name", "Name (2)", ...)
         existing_response = requests.get(f"{api_url}/api/templates", auth=auth, timeout=30)
-        existing_template_id = None
-        
-        if existing_response.status_code == 200:
-            existing_data = existing_response.json()
-            for t in existing_data.get("data", []):
-                if t.get("name") == template.template_name:
-                    existing_template_id = t.get("id")
-                    break
-        
-        payload = {
-            "name": template.template_name,
-            "type": template.template_type,
-            "body": template.template_body
-        }
-        
-        if existing_template_id:
-            # Update existing template
-            response = requests.put(
-                f"{api_url}/api/templates/{existing_template_id}",
-                json=payload,
-                auth=auth,
-                headers={"Content-Type": "application/json"},
-                timeout=30
-            )
-            action = "aktualisiert"
-        else:
-            # Create new template
-            response = requests.post(
-                f"{api_url}/api/templates",
-                json=payload,
-                auth=auth,
-                headers={"Content-Type": "application/json"},
-                timeout=30
-            )
-            action = "erstellt"
-        
-        if response.status_code == 200:
-            data = response.json()
-            template_id = existing_template_id or (data.get("data", {}).get("id") if isinstance(data.get("data"), dict) else None)
-            return ListmonkResponse(
-                success=True,
-                message=f"Template '{template.template_name}' erfolgreich {action}",
-                template_id=template_id
-            )
-        else:
+        existing_response.raise_for_status()
+        existing_names = {t.get("name") for t in existing_response.json().get("data", [])}
+        name = template.template_name
+        counter = 2
+        while name in existing_names:
+            name = f"{template.template_name} ({counter})"
+            counter += 1
+
+        payload = {"name": name, "type": template.template_type, "body": template.template_body}
+        response = requests.post(f"{api_url}/api/templates", json=payload, auth=auth, timeout=30)
+        if response.status_code != 200:
             raise HTTPException(status_code=response.status_code, detail=f"Listmonk API error: {response.text}")
+
+        template_id = response.json().get("data", {}).get("id")
+        # Verify Listmonk can render it; remove broken template otherwise
+        preview = requests.get(f"{api_url}/api/templates/{template_id}/preview", auth=auth, timeout=30)
+        if preview.status_code != 200:
+            requests.delete(f"{api_url}/api/templates/{template_id}", auth=auth, timeout=30)
+            raise HTTPException(status_code=400, detail=f"Listmonk kann das Template nicht darstellen: {preview.text}")
+
+        return ListmonkResponse(
+            success=True,
+            message=f"Template '{name}' erfolgreich erstellt",
+            template_id=template_id
+        )
     except requests.RequestException as e:
         raise HTTPException(status_code=500, detail=f"Connection error: {str(e)}")
 

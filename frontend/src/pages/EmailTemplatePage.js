@@ -404,7 +404,7 @@ export const EmailTemplatePage = () => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            template_name: `TFD - ${template.name}`,
+            template_name: `TFD - ${template.name}${data.lastChance ? ' - Letzte Chance' : ''}`,
             template_body: html,
             template_type: 'campaign'
           })

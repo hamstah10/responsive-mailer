@@ -90,3 +90,9 @@ Erstellen von responsiven E-Mail-Templates für TuningFiles Download.
 ## 2026-06 – Letzte Chance Schalter
 - Toggle "Letzte Chance (Erinnerung)" in editor for both Black Week templates (data.lastChance): red urgency bar on top (auto text "LETZTE CHANCE – Endet am <countdownEnd>" or custom urgencyText) + CTA becomes "JETZT NOCH SICHERN".
 - Listmonk export name gets suffix " - Letzte Chance" when toggle is on (so it doesn't overwrite the normal version).
+
+## 2026-06 – Bugfix Listmonk Export
+- Root cause empty preview: `{{ .UnsubscribeURL }}` is invalid in Listmonk (render error). Correct: `{{ UnsubscribeURL }}` (function). Fixed in all 7 templates.
+- Backend POST /api/listmonk/templates now never overwrites: picks free name ("Name", "Name (2)", ...), then calls Listmonk preview; if rendering fails the template is deleted and 400 with error is returned.
+- Bulk export also adds " - Letzte Chance" suffix.
+- Old broken template id 55 "TFD - Black Week" still in Listmonk (user should delete).
