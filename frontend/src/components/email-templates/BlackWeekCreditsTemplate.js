@@ -15,9 +15,14 @@ export const generateBlackWeekCreditsHTML = (data = {}) => {
     discountText = 'Extra-Credits geschenkt',
     validUntil = 'Gültig bis Sonntag, 23:59 Uhr',
     creditPackages = [
-      { name: '10 Credits', price: '89,00 €', bonus: '+1,5 Credits', bonusValue: 'Wert: 13,35 €' },
-      { name: '25 Credits', price: '199,00 €', bonus: '+3,75 Credits', bonusValue: 'Wert: 29,85 €' },
-      { name: '50 Credits', price: '349,00 €', bonus: '+7,5 Credits', bonusValue: 'Wert: 52,35 €' }
+      { name: '100 Credits', price: '115,00 €', bonus: '+15 Credits', bonusValue: 'Wert: 17,25 €' },
+      { name: '200 Credits', price: '225,00 €', bonus: '+30 Credits', bonusValue: 'Wert: 33,75 €' },
+      { name: '500 Credits', price: '550,00 €', bonus: '+75 Credits', bonusValue: 'Wert: 82,50 €' },
+      { name: '1.000 Credits', price: '1.050,00 €', bonus: '+150 Credits', bonusValue: 'Wert: 157,50 €' },
+      { name: '2.000 Credits', price: '2.000,00 €', bonus: '+300 Credits', bonusValue: 'Wert: 300,00 €' },
+      { name: '3.000 Credits', price: '2.850,00 €', bonus: '+450 Credits', bonusValue: 'Wert: 427,50 €' },
+      { name: '5.000 Credits', price: '4.250,00 €', bonus: '+750 Credits', bonusValue: 'Wert: 637,50 €' },
+      { name: '10.000 Credits', price: '8.000,00 €', bonus: '+1.500 Credits', bonusValue: 'Wert: 1.200,00 €' }
     ],
     benefitTitle = 'Ihre Vorteile als Bestandskunde',
     benefits = [
