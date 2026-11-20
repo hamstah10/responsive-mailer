@@ -158,6 +158,10 @@ export const generateBasicHTML = (data = {}) => {
       </td>
     </tr>
   </table>
+  <!-- Listmonk Content Placeholder (required) -->
+  <div style="display:none;font-size:0;line-height:0;max-height:0;overflow:hidden;">
+    {{ template "content" . }}
+  </div>
 </body>
 </html>`;
 };
