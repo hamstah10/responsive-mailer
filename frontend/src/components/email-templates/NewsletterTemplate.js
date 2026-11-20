@@ -194,12 +194,14 @@ export const generateNewsletterHTML = (data = {}) => {
                 <tr>
                   <td align="center" style="padding-top: 16px; border-top: 1px solid #333333;">
                     <p style="margin: 0; font-size: 12px; color: #555555;">
-                      <a href="${unsubscribeUrl}" style="color: #bd1f25; text-decoration: underline;">Abmelden</a> | 
                       <a href="https://tuningfiles-download.com/impressum" style="color: #666666; text-decoration: underline;">Impressum</a> | 
                       <a href="https://tuningfiles-download.com/datenschutz" style="color: #666666; text-decoration: underline;">Datenschutz</a>
                     </p>
                     <p style="margin: 12px 0 0 0; font-size: 11px; color: #444444;">
                       © ${new Date().getFullYear()} TuningFiles Download. Alle Rechte vorbehalten.
+                    </p>
+                    <p style="margin: 16px 0 0 0; font-size: 11px;">
+                      <a href="{{ .UnsubscribeURL }}" style="color: #555555; text-decoration: underline;">Newsletter abmelden</a>
                     </p>
                   </td>
                 </tr>

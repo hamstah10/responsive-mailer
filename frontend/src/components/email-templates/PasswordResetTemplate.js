@@ -228,6 +228,9 @@ export const generatePasswordResetHTML = (data = {}) => {
                     <p style="margin: 8px 0 0 0; font-size: 11px; color: #444444;">
                       Diese E-Mail wurde automatisch generiert.
                     </p>
+                    <p style="margin: 16px 0 0 0; font-size: 11px;">
+                      <a href="{{ .UnsubscribeURL }}" style="color: #555555; text-decoration: underline;">Newsletter abmelden</a>
+                    </p>
                   </td>
                 </tr>
               </table>

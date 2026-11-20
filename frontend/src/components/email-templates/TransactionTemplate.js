@@ -268,6 +268,9 @@ export const generateTransactionHTML = (data = {}) => {
                     <p style="margin: 12px 0 0 0; font-size: 11px; color: #444444;">
                       © ${new Date().getFullYear()} TuningFiles Download. Alle Rechte vorbehalten.
                     </p>
+                    <p style="margin: 16px 0 0 0; font-size: 11px;">
+                      <a href="{{ .UnsubscribeURL }}" style="color: #555555; text-decoration: underline;">Newsletter abmelden</a>
+                    </p>
                   </td>
                 </tr>
               </table>
